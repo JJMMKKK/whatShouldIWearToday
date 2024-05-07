@@ -41,6 +41,7 @@ public class MemberController {
         return memberService.readMemberById(memberId);
     }
 
+    @PostMapping("/login")
     public Optional<MemberVO> readMemberByUsernmaeAndPassword(String username, String password) {
         return memberService.readMemberByUsernameAndPassword(username, password);
     }
