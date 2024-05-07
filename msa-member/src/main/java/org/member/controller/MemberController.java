@@ -49,17 +49,13 @@ public class MemberController {
         return memberService.readMemberByEmail(email);
     }
 
-    public void updateMember(Long id, MemberDTO updateMemberData) throws Exception {
-        //아이디 중복 검사
-        if (!memberService.existsByUsername(updateMemberData.getUsername())) {
-            throw new Exception();
-        }
+    public void updateMember(Long id, String email) throws Exception {
         //이메일 중복 검사
-        if (!memberService.existsByEmail(updateMemberData.getEmail())) {
+        if (!memberService.existsByEmail(email)) {
             throw new Exception();
         }
         //데이터 변경 진행
-        memberService.updateMember(id, updateMemberData);
+        memberService.updateMember(id, email);
     }
 
     public void deleteMember(Long id) {

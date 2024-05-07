@@ -43,17 +43,10 @@ public class MemberService {
         return Optional.ofNullable(memberRepository.findByEmail(email));
     }
 
-    public void updateMember(Long id, MemberDTO member) {
-        Optional<MemberVO> beforeUpdateMemberOptional = memberRepository.findById(id);
-
-        if (beforeUpdateMemberOptional.isPresent()) {
-            beforeUpdateMemberOptional.get().setUsername(member.getUsername());
-            beforeUpdateMemberOptional.get().setPassword(member.getPassword());
-            beforeUpdateMemberOptional.get().setEmail(member.getEmail());
-
-            MemberVO updatedMember = beforeUpdateMemberOptional .get();
-            memberRepository.save(updatedMember );
-        }
+    public void updateMember(Long id, String email) {
+        MemberVO updateMember = memberRepository.findById(id).orElseThrow(() -> new RuntimeException("Member not found"));
+            updateMember.setEmail(email);
+        memberRepository.save(updateMember);
     }
 
     public void deleteMember(Long id) {
