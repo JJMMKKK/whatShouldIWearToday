@@ -1,4 +1,4 @@
-package com.wiw.whatShouldIWearToday.member;
+package org.member;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

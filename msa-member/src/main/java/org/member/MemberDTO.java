@@ -1,4 +1,4 @@
-package com.wiw.whatShouldIWearToday.member;
+package org.member;
 
 import jakarta.validation.constraints.*;
 import lombok.Value;
@@ -6,10 +6,10 @@ import lombok.Value;
 import java.io.Serializable;
 
 /**
- * DTO for {@link MemberVO}
+ * {@link MemberVO}와 관련된 DTO
  */
 @Value
-public class MemberVODto implements Serializable {
+public class MemberDTO implements Serializable {
     @Size(max = 50)
     @NotBlank(message = "아이디를 입력하세요")
     String username;

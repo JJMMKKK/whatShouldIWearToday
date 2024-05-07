@@ -1,11 +1,10 @@
 package com.wiw.whatShouldIWearToday.MemberController;
 
-import com.wiw.whatShouldIWearToday.member.MemberVO;
-import com.wiw.whatShouldIWearToday.member.MemberVODto;
-import com.wiw.whatShouldIWearToday.member.controller.MemberService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.member.MemberDTO;
+import org.member.controller.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +15,6 @@ import org.springframework.util.MultiValueMap;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,11 +31,11 @@ public class TestMemberController {
 
 //    private MemberVO member;
 
-    private MemberVODto mockDTO;
+    private MemberDTO mockDTO;
 
     @BeforeEach
     void setup() {
-        mockDTO = new MemberVODto("admin", "admin", "admin@admin.com");
+        mockDTO = new MemberDTO("admin", "admin", "admin@admin.com");
 
     }
 

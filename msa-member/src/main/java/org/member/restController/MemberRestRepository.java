@@ -1,4 +1,4 @@
-package com.wiw.whatShouldIWearToday.member.restController;
+package org.member.restController;
 
 public class MemberRestRepository {
 }

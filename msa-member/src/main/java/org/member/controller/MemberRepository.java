@@ -1,6 +1,6 @@
-package com.wiw.whatShouldIWearToday.member.controller;
+package org.member.controller;
 
-import com.wiw.whatShouldIWearToday.member.MemberVO;
+import org.member.MemberVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

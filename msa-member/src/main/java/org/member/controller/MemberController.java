@@ -1,9 +1,8 @@
-package com.wiw.whatShouldIWearToday.member.controller;
+package org.member.controller;
 
-import com.wiw.whatShouldIWearToday.member.MemberVO;
-import com.wiw.whatShouldIWearToday.member.MemberVODto;
+import org.member.MemberVO;
+import org.member.MemberDTO;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +20,7 @@ public class MemberController {
     }
 
     @PostMapping("/create")
-    public void createMember(MemberVODto createMemberData) throws Exception{
+    public void createMember(MemberDTO createMemberData) throws Exception{
         //아이디 중복 검사
         if (memberService.existsByUsername(createMemberData.getUsername())) {
             throw new Exception();
@@ -35,8 +34,7 @@ public class MemberController {
     }
 
     public List<MemberVO> readAllMembers() {
-        List<MemberVO> members = memberService.readAllMembers();
-        return members;
+        return memberService.readAllMembers();
     }
 
     public Optional<MemberVO> readMemberById(Long memberId) {
@@ -51,7 +49,7 @@ public class MemberController {
         return memberService.readMemberByEmail(email);
     }
 
-    public void updateMember(Long id, MemberVODto updateMemberData) throws Exception {
+    public void updateMember(Long id, MemberDTO updateMemberData) throws Exception {
         //아이디 중복 검사
         if (!memberService.existsByUsername(updateMemberData.getUsername())) {
             throw new Exception();

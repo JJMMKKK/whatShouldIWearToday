@@ -1,7 +1,7 @@
-package com.wiw.whatShouldIWearToday.member.controller;
+package org.member.controller;
 
-import com.wiw.whatShouldIWearToday.member.MemberVO;
-import com.wiw.whatShouldIWearToday.member.MemberVODto;
+import org.member.MemberVO;
+import org.member.MemberDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public void createMember(MemberVODto createMemberDataDTO) {
+    public void createMember(MemberDTO createMemberDataDTO) {
         MemberVO member = new MemberVO();
             member.setUsername(createMemberDataDTO.getUsername());
             member.setPassword(createMemberDataDTO.getPassword());
@@ -43,8 +43,9 @@ public class MemberService {
         return Optional.ofNullable(memberRepository.findByEmail(email));
     }
 
-    public void updateMember(Long id, MemberVODto member) {
+    public void updateMember(Long id, MemberDTO member) {
         Optional<MemberVO> beforeUpdateMemberOptional = memberRepository.findById(id);
+
         if (beforeUpdateMemberOptional.isPresent()) {
             beforeUpdateMemberOptional.get().setUsername(member.getUsername());
             beforeUpdateMemberOptional.get().setPassword(member.getPassword());
