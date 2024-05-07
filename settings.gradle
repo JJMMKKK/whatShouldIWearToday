@@ -1,1 +1,7 @@
 rootProject.name = 'whatShouldIWearToday'
+include 'msa-core'
+include 'msa-member'
+include 'msa-core:msa-gpt'
+findProject(':msa-core:msa-gpt')?.name = 'msa-gpt'
+include 'msa-gpt'
+
