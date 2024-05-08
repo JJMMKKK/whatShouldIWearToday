@@ -1,14 +1,17 @@
-package org.member.controller;
+package org.member.memberController;
 
+import lombok.extern.slf4j.Slf4j;
 import org.member.MemberVO;
 import org.member.MemberDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -20,7 +23,10 @@ public class MemberController {
     }
 
     @PostMapping("/create")
-    public void createMember(MemberDTO createMemberData) throws Exception{
+    public ModelAndView createMember(MemberDTO createMemberData) throws Exception{
+
+        log.info(createMemberData.toString());
+
         //아이디 중복 검사
         if (memberService.existsByUsername(createMemberData.getUsername())) {
             throw new Exception();
@@ -31,6 +37,11 @@ public class MemberController {
         }
         //회원가입 진행
         memberService.createMember(createMemberData);
+
+        ModelAndView view = new ModelAndView();
+            view.addObject("message", "회원가입 성공");
+            view.setViewName("LoginPage");
+        return view;
     }
 
     public List<MemberVO> readAllMembers() {
@@ -50,6 +61,7 @@ public class MemberController {
         return memberService.readMemberByEmail(email);
     }
 
+    @PostMapping("/updateMember")
     public void updateMember(Long id, String email) throws Exception {
         //이메일 중복 검사
         if (!memberService.existsByEmail(email)) {
@@ -59,6 +71,7 @@ public class MemberController {
         memberService.updateMember(id, email);
     }
 
+    @PostMapping("/deleteMember")
     public void deleteMember(Long id) {
         memberService.deleteMember(id);
     }

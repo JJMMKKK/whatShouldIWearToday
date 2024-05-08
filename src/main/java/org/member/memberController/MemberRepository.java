@@ -1,4 +1,4 @@
-package org.member.controller;
+package org.member.memberController;
 
 import org.member.MemberVO;
 import org.springframework.data.jpa.repository.JpaRepository;

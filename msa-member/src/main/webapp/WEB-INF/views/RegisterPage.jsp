@@ -7,22 +7,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/RegisterPage.js"/>"></script>
 
 </head>
 <body>
 
-<h1>Main Login Page</h1>
-<form method="post" action="<c:url value='/member/login'>">
-    username: <input type="text" name="username">
-    password: <input type="text" name="password">
-    <input type="submit" value="로그인">
+<h1>Main Register Page</h1>
+<form method="post" action="<c:url value='/member/create'/>">
+    username: <input type="text" id="username" name="username"><br>
+    <span id="existUsername"></span>
+    password: <input type="text" id="password" name="password"><br>
+    email: <input type="email" id="email" name="email"><br>
+    <span id="existEmail"></span>
+    <input type="submit" value="회원가입">
 </form>
-
-
-
-
+<p>
+    <a href="<c:url value='/LoginPage'/>">로그인 페이지</a>
+</p>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
