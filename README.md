@@ -1,7 +1,8 @@
 <h1>What Should I Wear Today?</h1>
 What Should I Wear Today?(오늘 뭐 입지?)는 Chat Gpt를 사용하는 날씨에 따른 옷 추천 프로그램입니다.<br>
 화면설계서: <a href="https://docs.google.com/presentation/d/1WIGNxzBNQpK3Q4mFGntJpOaWnN3snSJL/edit#slide=id.p1">오늘 뭐입지? 화면설계서</a>
-
+기능정의서: <a href="[https://docs.google.com/presentation/d/1WIGNxzBNQpK3Q4mFGntJpOaWnN3snSJL/edit#slide=id.p1](https://docs.google.com/spreadsheets/d/1y5I5Gak7hoy_W3KqU3e_zlCesWok3rgTISXhx0KGJ-8/edit#gid=1285253246)">오늘 뭐입지? 기능정의서</a>
+WBS: <a href="">오늘 뭐입지? WBS</a>
 
 <p><br>
 <h3>프로그램 사용 방법</h3>
