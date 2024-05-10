@@ -3,7 +3,6 @@ package org.member;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.Value;
-import org.springframework.context.annotation.Primary;
 
 import java.io.Serializable;
 

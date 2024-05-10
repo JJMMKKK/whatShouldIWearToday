@@ -37,7 +37,7 @@
         </form>
     </div>
 </p>
-
+<p>
     <form method="post" action="<c:url value="/member/logout"/>">
         <input type="submit" value="로그아웃">
     </form>
