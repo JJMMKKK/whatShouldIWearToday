@@ -25,11 +25,9 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    //회원가입
     @PostMapping("/create")
     public ModelAndView createMember(MemberDTO createMemberData, HttpSession session) throws Exception{
-
-        log.info(createMemberData.toString());
-
         //아이디 중복 검사
         if (memberService.existsByUsername(createMemberData.getUsername())) {
             throw new Exception();
@@ -43,24 +41,12 @@ public class MemberController {
 
         ModelAndView view = new ModelAndView();
             view.addObject("message", "회원가입 성공");
-            session.setAttribute("memberDTO", createMemberData);
+            session.setAttribute("memberDTO", createMemberData);                                                      //session
             view.setViewName("Member/MemberPage");
         return view;
     }
 
-    public List<MemberDTO> readAllMembers() {
-        return memberService.readAllMembers().stream()
-                .map(memberVO -> new MemberDTO(memberVO.getId(), memberVO.getUsername(), memberVO.getPassword(), memberVO.getEmail()))
-                .collect(Collectors.toList());
-    }
-
-
-    public Optional<MemberDTO> readMemberById(Long memberId) {
-        Optional<MemberVO> memberVO = memberService.readMemberById(memberId);
-        MemberDTO memberDTO = new MemberDTO(memberVO.get().getId(), memberVO.get().getUsername(), memberVO.get().getPassword(), memberVO.get().getEmail());
-        return Optional.of(memberDTO);
-    }
-
+    //로그인                                                                                                              //SpringSecurity
     @PostMapping("/login")
     public ModelAndView readMemberByUsernmaeAndPassword(String username, String password, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
@@ -76,6 +62,7 @@ public class MemberController {
         return modelAndView;
     }
 
+    //로그아웃                                                                                                            //SpringSecurity
     @PostMapping("logout")
     public ModelAndView logout(HttpSession session) {
         session.removeAttribute("memberDTO");
@@ -85,10 +72,7 @@ public class MemberController {
         return view;
     }
 
-    public Optional<MemberDTO> readMemberByEmail(String email) {
-        return memberService.readMemberByEmail(email);
-    }
-
+    //회원 이메일 변경 업데이트
     @PostMapping("/updateMember")
     public void updateMember(Long id, String email) throws Exception {
         //이메일 중복 검사
@@ -99,8 +83,24 @@ public class MemberController {
         memberService.updateMember(id, email);
     }
 
+    //회원 삭제
     @PostMapping("/deleteMember")
     public void deleteMember(Long id) {
         memberService.deleteMember(id);
     }
+
+//    public List<MemberDTO> readAllMembers() {
+//        return memberService.readAllMembers().stream()
+//                .map(memberVO -> new MemberDTO(memberVO.getId(), memberVO.getUsername(), memberVO.getPassword(), memberVO.getEmail()))
+//                .collect(Collectors.toList());
+//    }
+//    public Optional<MemberDTO> readMemberById(Long memberId) {
+//        Optional<MemberVO> memberVO = memberService.readMemberById(memberId);
+//        MemberDTO memberDTO = new MemberDTO(memberVO.get().getId(), memberVO.get().getUsername(), memberVO.get().getPassword(), memberVO.get().getEmail());
+//        return Optional.of(memberDTO);
+//    }
+//    public Optional<MemberDTO> readMemberByEmail(String email) {
+//        return memberService.readMemberByEmail(email);
+//    }
+
 }

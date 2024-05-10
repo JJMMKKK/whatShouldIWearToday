@@ -18,8 +18,9 @@ public class ClothVO {
     @Column(name = "clothid", nullable = false)
     private Integer id;
 
-    @Column(name = "userid")
-    private Integer userid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid")
+    private MemberVO memberVO;
 
     @Size(max = 50)
     @NotNull

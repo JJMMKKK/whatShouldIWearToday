@@ -1,0 +1,5 @@
+1. postgre 권한 부여 문제
+2. MemberPage.js 함수 효율화
+3. 옷 출력 메서드의 비효율성(전체 옷 출력 + 현재 유저의 옷 출력 --> 현재 유저의 옷 출력으로 sql 변경)
+4. updateClothes + ClothVO의 MemberVO 참조 문제
+5. N+1 디버깅 필요(api를 호출할 경우 dto에서 userid가 초기화 될 때 LAZY 초기화가 되는 것을 알 수 있음 (지연 로딩은 영속성 컨택스트가 없는 경우 db에 쿼리를 날려 데이터를 받아오기 때문))

@@ -24,13 +24,6 @@ https://ecolumbus.tistory.com/294
 
 https://jojoldu.tistory.com/468#2-npm-run%EB%8F%84-intellij%EC%97%90%EC%84%9C-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0
 
-
-$(document).on("click", ".deleteEvent", function ()
-- 이벤트 위임을 사용하여 상위 요소에 이벤트 핸들러를 연결
-- 동적으로 생성된 요소에 대해 일반적으로 사용
-
-$(".deleteEvent").on("click", function ()
-- 페이지 로드 시에 .deleteEvent 클래스를 가진 모든 요소에 이벤트 핸들러가 연결
-- 동적으로 생성된 요소에는 이벤트가 자동으로 연결되지 않기 때문에 이 방법은 초기에 존재하는 정적인 요소에 대해서만 유효
+https://9keyyyy.tistory.com/43
 
 

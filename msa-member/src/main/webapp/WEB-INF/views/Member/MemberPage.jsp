@@ -18,33 +18,16 @@
 
 <h1>Main Logined Page</h1>
 <p>
-    <c:choose>
-        <c:when test="${empty sessionScope.memberDTO}">
-            <p>회원 정보가 없습니다.</p>
-        </c:when>
-        <c:otherwise>
-            <p>${sessionScope.memberDTO}</p>
-        </c:otherwise>
-    </c:choose>
-
-    <c:choose>
-        <c:when test="${empty sessionScope.clothDTO}">
-            <p>옷이 없습니다.</p>
-        </c:when>
-        <c:otherwise>
-            <p>${sessionScope.clothDTO}</p>
-        </c:otherwise>
-    </c:choose>
+    <c:out value="${sessionScope.memberDTO}"/>
+</p>
+<p>
+    <span id="allClothesField"></span>
+</p>
+<p>
     <form method="post" action="<c:url value="/MyClothUpdatePage"/>">
         <input type="submit" value="장롱 정리하기">
     </form>
 </p>
-
-
-
-
-
-
 
     <form method="post" action="<c:url value="/member/logout"/>">
         <input type="submit" value="로그아웃">
