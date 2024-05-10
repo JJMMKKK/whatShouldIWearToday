@@ -4,32 +4,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CommonController {
+public class CommonMemberController {
 
     @GetMapping("/LoginPage")
     public String LoginPage() {
-        return "LoginPage";
+        return "Member/LoginPage";
     }
 
     @GetMapping("/RegisterPage")
     public String RegisterPage() {
-        return "RegisterPage";
+        return "Member/RegisterPage";
     }
 
     @GetMapping("/UpdateEmailPage")
     public String UpdateEmailPage() {
-        return "UpdateEmailPage";
+        return "Member/UpdateEmailPage";
     }
 
     @GetMapping("/DeletePage")
     public String DeletePage() {
-        return "DeletePage";
+        return "Member/DeletePage";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
+
+
 
 
 }

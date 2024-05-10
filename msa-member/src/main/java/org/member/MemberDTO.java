@@ -1,15 +1,21 @@
 package org.member;
 
 import jakarta.validation.constraints.*;
+import lombok.Data;
 import lombok.Value;
+import org.springframework.context.annotation.Primary;
 
 import java.io.Serializable;
 
 /**
  * {@link MemberVO}와 관련된 DTO
  */
+@Data
 @Value
 public class MemberDTO implements Serializable {
+    @NotNull
+    Integer id;
+
     @Size(max = 50)
     @NotBlank(message = "아이디를 입력하세요")
     String username;

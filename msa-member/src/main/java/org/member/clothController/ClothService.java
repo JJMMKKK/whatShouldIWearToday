@@ -1,7 +1,7 @@
 package org.member.clothController;
 
-import org.member.MemberDTO;
-import org.member.MemberVO;
+import org.member.ClothDTO;
+import org.member.ClothVO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,23 +18,39 @@ public class ClothService {
         this.clothRepository = clothRepository;
     }
 
-    public List<MemberVO> selectAllClothes() {
-        return new ArrayList<MemberVO>(clothRepository.findAll());
+    public List<ClothDTO> selectAllClothes() {
+        List<ClothVO> clothVOList = new ArrayList<>(clothRepository.findAll());
+        List<ClothDTO> clothDTOList = new ArrayList<>(clothVOList.size());
+        for (ClothVO clothVO : clothVOList) {
+            ClothDTO clothDTO = new ClothDTO();
+            clothDTO.setId(clothVO.getId());
+            clothDTO.setUserid(clothVO.getUserid());
+            clothDTO.setCategory(clothVO.getCategory());
+            clothDTO.setClothdata(clothVO.getClothdata());
+            clothDTOList.add(clothDTO);
+        }
+        return clothDTOList;
+
     }
 
-    public List<MemberVO> selectClothes(Long id, String category) {
+    public List<ClothVO> selectClothes(Integer id, String category) {
         Map<String, String> map = new HashMap<>();
             map.put("id", id.toString());
             map.put("category", category);
         return null;
     }
 
-    public void updateClothes(List<MemberVO> updatedClothes) {
-        clothRepository.saveAll(updatedClothes);
+    public void updateClothes(ClothDTO updatedCloth) {
+        ClothVO clothVO = new ClothVO();
+            clothVO.setId(updatedCloth.getId());
+            clothVO.setUserid(updatedCloth.getUserid());
+            clothVO.setCategory(updatedCloth.getCategory());
+            clothVO.setClothdata(updatedCloth.getClothdata());
+        clothRepository.save(clothVO);
     }
 
-    public void deleteClothes(MemberDTO memberDTO) {
-        clothRepository.delete(memberDTO);
+    public void deleteClothes(Integer id) {
+        clothRepository.deleteById(id);
     }
 
 }

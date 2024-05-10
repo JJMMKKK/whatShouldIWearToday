@@ -35,11 +35,11 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
-    public Optional<MemberVO> readMemberByUsernameAndPassword(String username, String password) {
+    public Optional<MemberDTO> readMemberByUsernameAndPassword(String username, String password) {
         return Optional.ofNullable(memberRepository.findByUsernameAndPassword(username, password));
     }
 
-    public Optional<MemberVO> readMemberByEmail(String email) {
+    public Optional<MemberDTO> readMemberByEmail(String email) {
         return Optional.ofNullable(memberRepository.findByEmail(email));
     }
 

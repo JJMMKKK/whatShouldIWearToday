@@ -24,24 +24,13 @@ https://ecolumbus.tistory.com/294
 
 https://jojoldu.tistory.com/468#2-npm-run%EB%8F%84-intellij%EC%97%90%EC%84%9C-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0
 
-react 설치
-- node.js 설치
-- C:\Users\user\AppData\Roaming위치에 npm 폴더 생성(해당 경로에 npm install npm -g)
-- Command Prompt에서 cd msa-gpt\src\main
-- npx create-react-app frontend # npx create-reeact {whatShouldIWearToday}
-- 설치 후 App.js가 있는 폴더로 가서 npm run start
-- Configuration에서 npm 등록
-    C:\whatShouldIWearToday\msa-gpt\src\main\frontend\package.json
-    npm
-    start
 
-각 모듈 작업 디렉터리 설정
-- 설정하지 않으면 루트의 webapp으로 이동
+$(document).on("click", ".deleteEvent", function ()
+- 이벤트 위임을 사용하여 상위 요소에 이벤트 핸들러를 연결
+- 동적으로 생성된 요소에 대해 일반적으로 사용
 
-3.X.X 이상의 gradle 설정
-- 없으면 javax.servlet.jsp.tagext.TagLibraryValidator 에러 출력
-
-
-
+$(".deleteEvent").on("click", function ()
+- 페이지 로드 시에 .deleteEvent 클래스를 가진 모든 요소에 이벤트 핸들러가 연결
+- 동적으로 생성된 요소에는 이벤트가 자동으로 연결되지 않기 때문에 이 방법은 초기에 존재하는 정적인 요소에 대해서만 유효
 
 
