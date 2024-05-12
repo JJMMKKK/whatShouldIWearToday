@@ -34,9 +34,9 @@ public class WeatherApiController {
     @Value("${weather.api.key}")
     String weatherApiKey;
 
-    @GetMapping("/")
-    public String main(){
-        return "Main";
+    @GetMapping("/weatherMain")
+    public String WeatherMain(){
+        return "WeatherMain";
     }
 
     @PostMapping("/weatherRequest")

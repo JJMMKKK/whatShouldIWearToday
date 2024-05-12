@@ -1,0 +1,4 @@
+//JSON 데이터에서 필요한 데이터 추출
+JSONObject jsonObject = new JSONObject(JSON텍스트(String타입));
+JSONObject items = jsonObject.getJSONObject("response").getJSONObject("body");
+JSONArray itemsArray = items.getJSONArray("items");
