@@ -2,4 +2,5 @@ rootProject.name = 'whatShouldIWearToday'
 include 'msa-core'
 include 'msa-member'
 include 'msa-gpt'
+include 'msa-weather'
 

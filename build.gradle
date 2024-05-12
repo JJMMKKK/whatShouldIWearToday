@@ -36,6 +36,9 @@ subprojects {
 		implementation 'org.springframework.boot:spring-boot-starter-json'
 		implementation 'org.springframework.boot:spring-boot-starter-tomcat'
 
+		//JSON
+		implementation group: 'org.json', name: 'json', version: '20090211'
+
 		//jsp
 		implementation 'org.springframework.boot:spring-boot-devtools:'
 		implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
@@ -89,6 +92,13 @@ project(':msa-member'){
 }
 
 project(':msa-gpt'){
+	dependencies {
+		implementation project(':msa-core')
+	}
+}
+
+project(':msa-weather'){
+
 	dependencies {
 		implementation project(':msa-core')
 	}

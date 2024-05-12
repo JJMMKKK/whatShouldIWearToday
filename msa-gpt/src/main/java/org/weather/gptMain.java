@@ -1,12 +1,12 @@
-package org.member;
-
+package org.weather;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class memberMain {
+public class gptMain {
+
     public static void main(String[] args) {
-        SpringApplication.run(memberMain.class, args);
+        SpringApplication.run(gptMain.class, args);
     }
 }
