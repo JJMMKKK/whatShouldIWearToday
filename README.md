@@ -5,7 +5,7 @@ What Should I Wear Today?(오늘 뭐 입지?)는 Chat Gpt를 사용하는 날씨
 WBS: <a href="">오늘 뭐입지? WBS</a><br>
 ERD: <a href="">오늘 뭐입지? ERD</a><br>
 Usecase: <a href="">오늘 뭐입지? Usecase</a><br>
-개발 기록: <a href="https://minkee95.tistory.com/category/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">오늘 뭐입지? 개발기록</a><br>
+개발 일지: <a href="https://minkee95.tistory.com/category/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">오늘 뭐입지? 개발 일지</a><br>
 개발 캘린더: <a href="https://docs.google.com/spreadsheets/d/1ebNU_C5rRrkqbPds9ZFob8DVB4IETuH2rK6kcbQm4hw/edit#gid=0">오늘 뭐입지? 개발 캘린더</a><br>
 소개(노션): <a href="https://www.notion.so/501ab6bd429f488691ec8e224e0b1643?v=7d1d2f8947db4eefae4fb6c063197cda&p=bc92c096396841128699d69a9307ccaa&pm=c">오늘 뭐입지? 소개</a><br>
 
