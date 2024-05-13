@@ -46,3 +46,5 @@
         if(stringDate.equals("모래")){
             formattedDate += 2;
         }
+
+

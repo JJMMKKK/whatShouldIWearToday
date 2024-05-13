@@ -1,0 +1,1 @@
+BeanUtils.copyProperties(복사할 속성이 있는 DTO/VO, 붙여넣어질 속성이 있는 DTO/VO);

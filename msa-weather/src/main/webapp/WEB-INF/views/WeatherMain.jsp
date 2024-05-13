@@ -28,8 +28,8 @@
         <tbody>
             <c:forEach var="data" items="${weatherDataDTOList}">
                 <tr>
-                    <th><c:out value="${data.category}"/></th>
-                    <th><c:out value="${data.fcstValue}"/></th>
+                    <td><c:out value="${data.category}"/></td>
+                    <td><c:out value="${data.fcstValue}"/></td>
                 </tr>
             </c:forEach>
         </tbody>
