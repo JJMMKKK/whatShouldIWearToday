@@ -3,6 +3,10 @@ What Should I Wear Today?(오늘 뭐 입지?)는 Chat Gpt를 사용하는 날씨
 화면설계서: <a href="https://docs.google.com/presentation/d/1WIGNxzBNQpK3Q4mFGntJpOaWnN3snSJL/edit#slide=id.p1">오늘 뭐입지? 화면설계서</a><br>
 기능정의서: <a href="https://docs.google.com/spreadsheets/d/1y5I5Gak7hoy_W3KqU3e_zlCesWok3rgTISXhx0KGJ-8/edit#gid=1285253246">오늘 뭐입지? 기능정의서</a><br>
 WBS: <a href="https://docs.google.com/spreadsheets/d/1ebNU_C5rRrkqbPds9ZFob8DVB4IETuH2rK6kcbQm4hw/edit#gid=0">오늘 뭐입지? WBS</a>
+ERD: <a href="">오늘 뭐입지? ERD</a>
+Usecase: <a href="">오늘 뭐입지? Usecase</a>
+개발 기록: <a href="https://minkee95.tistory.com/category/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">오늘 뭐입지? 개발기록</a>
+소개(노션): <a href="https://www.notion.so/501ab6bd429f488691ec8e224e0b1643?v=7d1d2f8947db4eefae4fb6c063197cda&p=bc92c096396841128699d69a9307ccaa&pm=c">오늘 뭐입지? 소개</a>
 
 <p><br>
 <h3>프로그램 사용 방법</h3>
