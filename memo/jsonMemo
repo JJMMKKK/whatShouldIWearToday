@@ -2,3 +2,6 @@
 JSONObject jsonObject = new JSONObject(JSON텍스트(String타입));
 JSONObject items = jsonObject.getJSONObject("response").getJSONObject("body");
 JSONArray itemsArray = items.getJSONArray("items");
+
+JsonNode node = objectMapper.readTree(response.getBody());
+String content = node.path("choices").get(0).path("message").path("content").asText();
