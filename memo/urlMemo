@@ -1,25 +1,25 @@
  //Url 생성
-            String stringUrl =
-                    "http://apis.data.go.kr/B552584/UlfptcaAlarmInqireSvc/getUlfptcaAlarmInfo" +
-                            "?year=" + "2020" +
-                            "&pageNo=" + "1" +
-                            "&numOfRows=" + "100" +
-                            "&returnType=" + "xml" +
-                            "&serviceKey=" + apiKey;
+String stringUrl =
+    "http://apis.data.go.kr/B552584/UlfptcaAlarmInqireSvc/getUlfptcaAlarmInfo" +
+            "?year=" + "2020" +
+            "&pageNo=" + "1" +
+            "&numOfRows=" + "100" +
+            "&returnType=" + "xml" +
+            "&serviceKey=" + apiKey;
 
-            //HTTP Request
-            URL url = new URL(stringUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+//HTTP Request
+URL url = new URL(stringUrl);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+connection.setRequestMethod("GET");
 
-            //응답코드 확인
-            log.info("Response Code: {}", connection.getResponseCode());
+//응답코드 확인
+log.info("Response Code: {}", connection.getResponseCode());
 
-            //응답 처리
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response = String.join("/n", bufferedReader.lines().toList());
-            bufferedReader.close();
-            connection.disconnect();
+//응답 처리
+BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+String response = String.join("/n", bufferedReader.lines().toList());
+bufferedReader.close();
+connection.disconnect();
 
-            //JSON 데이터 출력
-            log.info("Response: {}", response);
+//JSON 데이터 출력
+log.info("Response: {}", response);

@@ -1,50 +1,50 @@
-    <select name="base_time">
-        <option value="0100">01시</option>
-        <option value="0200">02시</option>
-        <option value="0300">03시</option>
-        <option value="0400">04시</option>
-        <option value="0500">05시</option>
-        <option value="0600">06시</option>
-        <option value="0700">07시</option>
-        <option value="0800">08시</option>
-        <option value="0900">09시</option>
-        <option value="1000">10시</option>
-        <option value="1100">11시</option>
-        <option value="1200">12시</option>
-        <option value="1300">13시</option>
-        <option value="1400">14시</option>
-        <option value="1500">15시</option>
-        <option value="1600">16시</option>
-        <option value="1700">17시</option>
-        <option value="1800">18시</option>
-        <option value="1900">19시</option>
-        <option value="2000">20시</option>
-        <option value="2100">21시</option>
-        <option value="2200">22시</option>
-        <option value="2300">23시</option>
-        <option value="2400">24시</option>
-    </select><br>
+<select name="base_time">
+<option value="0100">01시</option>
+<option value="0200">02시</option>
+<option value="0300">03시</option>
+<option value="0400">04시</option>
+<option value="0500">05시</option>
+<option value="0600">06시</option>
+<option value="0700">07시</option>
+<option value="0800">08시</option>
+<option value="0900">09시</option>
+<option value="1000">10시</option>
+<option value="1100">11시</option>
+<option value="1200">12시</option>
+<option value="1300">13시</option>
+<option value="1400">14시</option>
+<option value="1500">15시</option>
+<option value="1600">16시</option>
+<option value="1700">17시</option>
+<option value="1800">18시</option>
+<option value="1900">19시</option>
+<option value="2000">20시</option>
+<option value="2100">21시</option>
+<option value="2200">22시</option>
+<option value="2300">23시</option>
+<option value="2400">24시</option>
+</select><br>
 
 
-        <select name="base_date">
-            <option value="오늘">오늘</option>
-            <option value="내일">내일</option>
-            <option value="모래">모래</option>
-        </select><br>
+<select name="base_date">
+    <option value="오늘">오늘</option>
+    <option value="내일">내일</option>
+    <option value="모래">모래</option>
+</select><br>
 
-        log.info(weatherareavoDTO.getBase_date());
+log.info(weatherareavoDTO.getBase_date());
 
-        String stringDate = weatherareavoDTO.getBase_date();
-        LocalDate localDate = LocalDate.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        Integer formattedDate = Integer.valueOf(localDate.format(dateTimeFormatter));
-        log.info(String.valueOf(formattedDate));
+String stringDate = weatherareavoDTO.getBase_date();
+LocalDate localDate = LocalDate.now();
+DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+Integer formattedDate = Integer.valueOf(localDate.format(dateTimeFormatter));
+log.info(String.valueOf(formattedDate));
 
-        if(stringDate.equals("내일")){
-            formattedDate += 1;
-        }
-        if(stringDate.equals("모래")){
-            formattedDate += 2;
-        }
+if(stringDate.equals("내일")){
+    formattedDate += 1;
+}
+if(stringDate.equals("모래")){
+    formattedDate += 2;
+}
 
 
