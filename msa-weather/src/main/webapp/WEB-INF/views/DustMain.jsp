@@ -32,13 +32,14 @@
             <tr>
                 <td><c:out value="${paticulatemattervoDto.datatime}"/></td>
                 <td><c:out value="${paticulatemattervoDto.pm25grade}"/></td>
-                <td><c:out value="${paticulatemattervoDto.pm25value}"/></td>
+                <td><c:out value="${paticulatemattervoDto.pm25value}"/>㎍/㎥</td>
                 <td><c:out value="${paticulatemattervoDto.pm10grade}"/></td>
-                <td><c:out value="${paticulatemattervoDto.pm10value}"/></td>
+                <td><c:out value="${paticulatemattervoDto.pm10value}"/>㎍/㎥</td>
             </tr>
         </tbody>
     </table>
 </p>
+* 점검 등으로 인해 미세먼지 상태나 수치가 제대로 표기되지 않을 수 있습니다.
 
 <p>
     <form id="DustRequest" action="<c:url value='/dustRequest'/>" method="POST">

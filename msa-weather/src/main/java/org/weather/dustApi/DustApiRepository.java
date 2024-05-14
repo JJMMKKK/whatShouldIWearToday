@@ -10,6 +10,4 @@ public interface DustApiRepository extends JpaRepository<Paticulatemattervo, Int
 
     @Transactional
     Paticulatemattervo findBysidonameAndStationname(String sidoname, String stationname);
-
-    Paticulatemattervo findByStationname(String stationname);
 }

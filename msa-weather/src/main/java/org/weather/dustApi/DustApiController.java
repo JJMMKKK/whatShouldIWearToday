@@ -1,5 +1,6 @@
 package org.weather.dustApi;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -7,7 +8,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.weather.PaticulatemattervoDto;
@@ -23,16 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 public class DustApiController {
 
     private final DustApiService dustApiService;
     private final PlaceService placeService;
-
-    private DustApiController(DustApiService dustApiService, PlaceService placeService){
-        this.dustApiService = dustApiService;
-        this.placeService = placeService;
-    }
 
     @Value("${dust.api.key}")
     private String apiKey;
@@ -104,7 +100,7 @@ public class DustApiController {
             }
 
             //List에 들어간 데이터 확인
-            log.info("particulateMatterList: {}", paticulateMatterList.toString());
+            //log.info("particulateMatterList: {}", paticulateMatterList.toString());
 
             dustApiService.dustRequest(paticulateMatterList);
 
