@@ -3,7 +3,6 @@ package org.weather;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -44,10 +43,10 @@ public class PaticulatemattervoDto implements Serializable {
 
     public void setPm25grade(String pm25grade) {
         this.pm25grade = switch (pm25grade){
-            case "1" -> "좋음";
-            case "2" -> "보통";
-            case "3" -> "나쁨";
-            case "4" -> "매우나쁨";
+            case "1", "좋음" -> "좋음";
+            case "2", "보통" -> "보통";
+            case "3", "나쁨" -> "나쁨";
+            case "4", "매우나쁨" -> "매우나쁨";
             default -> "점검 중";
         };
     }
@@ -58,10 +57,10 @@ public class PaticulatemattervoDto implements Serializable {
 
     public void setPm10grade(String pm10grade) {
         this.pm10grade = switch (pm10grade){
-            case "1" -> "좋음";
-            case "2" -> "보통";
-            case "3" -> "나쁨";
-            case "4" -> "매우나쁨";
+            case "1", "좋음" -> "좋음";
+            case "2", "보통" -> "보통";
+            case "3", "나쁨" -> "나쁨";
+            case "4", "매우나쁨" -> "매우나쁨";
             default -> "점검 중";
         };
     }

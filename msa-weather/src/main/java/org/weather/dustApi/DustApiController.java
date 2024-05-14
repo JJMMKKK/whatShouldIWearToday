@@ -1,6 +1,5 @@
 package org.weather.dustApi;
 
-import ch.qos.logback.core.model.Model;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,8 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.weather.PaticulatemattervoDto;
+import org.weather.PlaceDto;
 import org.weather.place.PlaceService;
 
 import java.io.BufferedReader;
@@ -38,17 +39,18 @@ public class DustApiController {
 
     @GetMapping("/dustMain")
     public ModelAndView dustMain(){
+        log.info("dustMain");
         String country = "경기";
         String area = "용인시수지구";
-        String Stationname = placeService.findStationnameByCountryAndArea(country, area);
-        PaticulatemattervoDto paticulatemattervoDto = dustApiService.findByStationname(Stationname);
+        PlaceDto placeDto = placeService.findByCountryAndArea(country, area);
+        PaticulatemattervoDto paticulatemattervoDto = dustApiService.findByStationname(placeDto);
         ModelAndView mav = new ModelAndView("DustMain");
         mav.addObject("paticulatemattervoDto", paticulatemattervoDto);
         mav.addObject("area", area);
         return mav;
     }
 
-    @PostMapping("/dustRequest")
+    @RequestMapping("/dustRequest")
     public String dustRequest() throws IOException, JSONException {
 
             String country = "%EA%B2%BD%EA%B8%B0";  // 한글이 아스키코드로 변환되어야 함
@@ -102,7 +104,7 @@ public class DustApiController {
             }
 
             //List에 들어간 데이터 확인
-            //log.info("particulateMatterList: {}", paticulateMatterList.toString());
+            log.info("particulateMatterList: {}", paticulateMatterList.toString());
 
             dustApiService.dustRequest(paticulateMatterList);
 
