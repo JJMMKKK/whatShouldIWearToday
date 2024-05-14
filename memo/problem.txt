@@ -15,3 +15,6 @@
 지금 당장은 delete & save를 사용하고 있지만 saveAll로 변환할 예정
 saveAll에 사용되는 List는 flag컬럼이 null인 경우에만 포함되도록 변경할 것
 또한 DB의 Table의 Id 역시 바꿔야 할 것이다. 숫자로 하던가, 아니면 다른 명칭을 사용하던가
+
+11. 미세먼지DB와 place DB의 데이터가 불일치
+12. include에 사용되는 jsp 코드 정보 정리

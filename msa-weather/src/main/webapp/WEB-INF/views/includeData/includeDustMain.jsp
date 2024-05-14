@@ -13,11 +13,10 @@
 </head>
 <body>
 
-<h1>Weather and Dust Main Page</h1>
-
 <p>
-    <jsp:include page="includeData/includeWeatherMain.jsp"/>
+    <span id="response_dustData"></span>
 </p>
+* 점검 등으로 인해 미세먼지 상태나 수치가 제대로 표기되지 않을 수 있습니다.
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
