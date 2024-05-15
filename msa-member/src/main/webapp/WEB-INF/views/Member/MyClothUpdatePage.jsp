@@ -23,7 +23,7 @@
     <input type="button" id="showClothField" value="옷 수정하기">
     <div id="clothField" style="display: none">
         <form id="clothSaveField">
-            <input type="hidden" id="userid" value="${sessionScope.useMemberDataDTO.id}">
+            <input type="hidden" id="userid" value="<c:out value="${useMemberDataDTO.id}"/>">
             <input type="text" id="cloth" name="cloth">
             <select id="categoryForCloth">
                 <option value="모자">모자</option>
@@ -38,7 +38,9 @@
     </div>
 </p>
 <p>
-    <form method="post" action="<c:url value="/member/logout"/>">
+    <a href="<c:url value='/MemberPage'/>">마이페이지</a>
+
+    <form method="post" action="<c:url value="/logout"/>">
         <input type="submit" value="로그아웃">
     </form>
 </p>

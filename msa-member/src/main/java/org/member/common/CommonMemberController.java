@@ -26,6 +26,11 @@ public class CommonMemberController {
         return "Member/DeletePage";
     }
 
+    @GetMapping("/LogoutPage")
+    public String LogoutPage() {
+        return "Main";
+    }
+
 
 
 

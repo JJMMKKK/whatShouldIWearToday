@@ -10,7 +10,6 @@ import lombok.Value;
 import java.time.Instant;
 
 @Data
-@Value
 public class UseMemberDataDTO {
 
     @NotNull
@@ -32,5 +31,4 @@ public class UseMemberDataDTO {
     @Size(max = 50)
     @NotBlank(message = "위치를 입력하세요")
     String area;
-
 }

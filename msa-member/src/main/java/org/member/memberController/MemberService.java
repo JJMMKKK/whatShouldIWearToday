@@ -23,18 +23,6 @@ public class MemberService {
         log.info("Member: {}", member);
         memberRepository.save(member);
     }
-
-    //로그인                                                                                                              //SpringSecurity
-    public Optional<MemberDTO> readMemberByUsernameAndPassword(String username, String password) throws Exception {
-        Optional<MemberVO> memberVO = Optional.ofNullable(memberRepository.findByUsernameAndPassword(username, password));
-        log.info("memberVO: {}", memberVO);
-        if (memberVO.isPresent()) {
-            MemberDTO memberDTO = new MemberDTO();
-            BeanUtils.copyProperties(memberVO.get(), memberDTO);
-            return Optional.of(memberDTO);
-        }
-        throw new Exception();
-    }
     
     //회원 이메일 정보 변경
     public void updateMember(Long id, String email) {
@@ -59,19 +47,4 @@ public class MemberService {
         return memberRepository.existsByEmail(email);
     }
 
-
-
-
-//    public List<MemberVO> readAllMembers() {
-//        List<MemberVO> members = new ArrayList<>();
-//        memberRepository.findAll().forEach(memberVO -> members.add(memberVO));
-//        return members;
-//    }
-//
-//    public Optional<MemberVO> readMemberById(Long id) {
-//        return memberRepository.findById(id);
-//    }
-//    public Optional<MemberDTO> readMemberByEmail(String email) {
-//        return Optional.ofNullable(memberRepository.findByEmail(email));
-//    }
 }
