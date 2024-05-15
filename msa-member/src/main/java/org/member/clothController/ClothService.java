@@ -1,32 +1,34 @@
 package org.member.clothController;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.member.ClothDTO;
 import org.member.ClothVO;
 import org.member.MemberVO;
+import org.member.memberController.MemberRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class ClothService {
 
-    public final ClothRepository clothRepository;
-
-    public ClothService(ClothRepository clothRepository) {
-        this.clothRepository = clothRepository;
-    }
+    private final ClothRepository clothRepository;
+    private final ClothUseridRepository idRepository;
 
     //옷 불러오기 메서드
-    public List<ClothDTO> selectAllClothes() {
-        List<ClothVO> clothVOList = new ArrayList<>(clothRepository.findAll());
+    public List<ClothDTO> findAllByUserid(Integer userid) {
+        MemberVO member = new MemberVO();
+            member.setId(userid);
+        List<ClothVO> clothVOList = idRepository.findAllByMemberVO(member);
         List<ClothDTO> clothDTOList = new ArrayList<>(clothVOList.size());
         for (ClothVO clothVO : clothVOList) {
-              ClothDTO clothDTO = new ClothDTO();
-                clothDTO.setId(clothVO.getId());
-                clothDTO.setUserid(clothVO.getMemberVO().getId());
-                clothDTO.setCategory(clothVO.getCategory());
-                clothDTO.setClothdata(clothVO.getClothdata());
+            ClothDTO clothDTO = new ClothDTO();
+            BeanUtils.copyProperties(clothVO, clothDTO);
             clothDTOList.add(clothDTO);
         }
         return clothDTOList;

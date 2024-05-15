@@ -1,32 +1,39 @@
 package org.member.memberController;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.member.MemberVO;
 import org.member.MemberDTO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
+@Slf4j
 @Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-
     //회원가입
     public void createMember(MemberDTO createMemberDataDTO) {
         MemberVO member = new MemberVO();
-            member.setUsername(createMemberDataDTO.getUsername());
-            member.setPassword(createMemberDataDTO.getPassword());
-            member.setEmail(createMemberDataDTO.getEmail());
+        BeanUtils.copyProperties(createMemberDataDTO, member);
+        log.info("Member: {}", member);
         memberRepository.save(member);
     }
 
     //로그인                                                                                                              //SpringSecurity
-    public Optional<MemberDTO> readMemberByUsernameAndPassword(String username, String password) {
-        return Optional.ofNullable(memberRepository.findByUsernameAndPassword(username, password));
+    public Optional<MemberDTO> readMemberByUsernameAndPassword(String username, String password) throws Exception {
+        Optional<MemberVO> memberVO = Optional.ofNullable(memberRepository.findByUsernameAndPassword(username, password));
+        log.info("memberVO: {}", memberVO);
+        if (memberVO.isPresent()) {
+            MemberDTO memberDTO = new MemberDTO();
+            BeanUtils.copyProperties(memberVO.get(), memberDTO);
+            return Optional.of(memberDTO);
+        }
+        throw new Exception();
     }
     
     //회원 이메일 정보 변경

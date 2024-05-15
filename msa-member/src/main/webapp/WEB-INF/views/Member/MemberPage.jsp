@@ -18,9 +18,11 @@
 
 <h1>Main Logined Page</h1>
 <p>
-    <c:out value="${sessionScope.memberDTO}"/>
+    <c:out value="${sessionScope.useMemberDataDTO}"/>
 </p>
 <p>
+    <h4></h4>
+    <input type="hidden" id="userid" value="${sessionScope.useMemberDataDTO.id}">
     <span id="allClothesField"></span>
 </p>
 <p>

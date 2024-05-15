@@ -6,10 +6,12 @@ $(function(){
 })//$(function()
 
 function viewMyClothes(){
+    var userid = $("#userid").val()
     var allClothesField = $("#allClothesField")
     $.ajax({
         type: "post",
         url: "/selectAllClothes",
+        data: {userid: userid},
         success: function(response){
             var tableHtml = "<table>";
             tableHtml += "<tr><th>Category</th><th>Cloth</th></tr>";

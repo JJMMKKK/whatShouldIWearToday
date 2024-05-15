@@ -11,12 +11,17 @@ $(function(){
     // 옷 저장 Ajax
     $("#clothSaveField").on("submit", function(event){
         event.preventDefault();
+        var userid = $("#userid").val();
+        var clothdata = $("#cloth").val();
+        var category = $("#categoryForCloth").val();
+
         $.ajax({
             type: "post",
             url: "/updateCloth",
             data: {
-                clothdata : $("#cloth").val(),          //무한재귀가 뜬다면 val() 입력하지 않았는지 확인
-                category : $("#categoryForCloth").val()
+                userid: userid,
+                clothdata : clothdata,
+                category : category
             },
             datatype: "text",
             success: function(){
@@ -49,10 +54,12 @@ $(function(){
 })//$(function()
 
 function viewMyClothes(){
+    var userid = $("#userid").val()
     var allClothesField = $("#allClothesField")
     $.ajax({
         type: "post",
         url: "/selectAllClothes",
+        data: {userid: userid},
         success: function(response){
             var tableHtml = "<table>";
             tableHtml += "<tr><th>Category</th><th>Cloth</th><th>삭제</th></tr>";

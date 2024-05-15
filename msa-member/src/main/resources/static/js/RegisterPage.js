@@ -1,4 +1,12 @@
 $(function(){
+
+    // 지역에 따른 위치 출력
+    changeAreaByCountry()
+
+    $("#country").on("change", function(){
+        changeAreaByCountry()
+    })
+
     //유저 아이디 중복 검사
     var username = $("#username").val();
     if(username){
@@ -45,7 +53,31 @@ $(function(){
             }
         })
     }//이메일 중복 검사 끝
-    
-    
-    
+
 })
+
+function changeAreaByCountry(){
+    var country = $("#country").val()
+    var areaInput = $("#areaInput")
+
+    $.ajax({
+        type: "post",
+        url: "/findAreasByCountry",
+        data: {
+            country: country
+        },
+        datatype: "json",
+        success: function(response){
+
+            let htmlSelection = "<select id='area' name='area'>";
+            response.forEach(areaName => {
+                htmlSelection += `<option value="${areaName}">${areaName}</option>`
+            })
+            htmlSelection +=  "</select>"
+            areaInput.html(htmlSelection);
+        },
+        error: function(){
+            console.log("지역에 따른 위치 출력 에러")
+        }
+    })
+}

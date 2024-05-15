@@ -6,19 +6,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.Instant;
 
 @Getter
 @Setter
-@Entity                         //JPA가 관리하는 클래스
-@Table(name = "membervo")       //테이블과 매핑할 테이블은 해당 어노테이션을 붙임
+@ToString
+@Entity
+@Table(name = "membervo")
 public class MemberVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('users_userid_seq'")
+    @ColumnDefault("nextval('membervo_userid_seq'")
     @Column(name = "userid", nullable = false)
     private Integer id;
 
@@ -39,8 +40,18 @@ public class MemberVO {
     private String email;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
+    @NotNull
     @Column(name = "registerdate")
-    @DateTimeFormat
     private Instant registerdate;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "country", length = 50)
+    private String country;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "area", length = 50)
+    private String area;
 
 }

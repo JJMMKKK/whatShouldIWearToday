@@ -24,20 +24,13 @@ public class ClothController {
 
     //옷 불러오기 메서드
     @PostMapping("/selectAllClothes")
-    public List<ClothDTO> selectAllClothes(HttpSession session){
+    public List<ClothDTO> selectAllClothes(Integer userid, HttpSession session){
         
-        //전체 옷 가져오기
-        List<ClothDTO> clothDTOS = clothService.selectAllClothes();
+        //현재 유저의 옷 가져오기
+        List<ClothDTO> clothDTOS = clothService.findAllByUserid(userid);
+        log.info(clothDTOS.toString());
 
-        // 현재 로그인한 유저의 옷만 출력
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
-        List<ClothDTO> memberClothes = new ArrayList<>();
-        for (ClothDTO clothDTO : clothDTOS) {
-            if (clothDTO.getUserid().equals(memberDTO.getId())) {
-                memberClothes.add(clothDTO);
-            }
-        }
-        return memberClothes;
+        return clothDTOS;
     }
 
 //    @PostMapping("/selectClothes")
@@ -48,8 +41,7 @@ public class ClothController {
     //옷 추가하기 메서드
     @PostMapping("/updateCloth")
     public void updateCloth(ClothDTO updatedCloth, HttpSession session){
-        MemberDTO member = (MemberDTO) session.getAttribute("memberDTO");
-            updatedCloth.setUserid(member.getId());
+        //log.info("updateCloth {}", updatedCloth);
         clothService.updateClothes(updatedCloth);
     }
 
