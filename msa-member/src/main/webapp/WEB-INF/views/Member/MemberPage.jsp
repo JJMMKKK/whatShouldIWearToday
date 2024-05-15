@@ -18,11 +18,11 @@
 
 <h1>Main Logined Page</h1>
 <p>
-    <c:out value="${sessionScope.useMemberDataDTO}"/>
+    <c:out value="${useMemberDataDTO}"/>
 </p>
 <p>
     <h4></h4>
-    <input type="hidden" id="userid" value="${sessionScope.useMemberDataDTO.id}">
+    <input type="hidden" id="userid" value="<c:out value="${useMemberDataDTO.id}"/>">
     <span id="allClothesField"></span>
 </p>
 <p>
@@ -31,7 +31,7 @@
     </form>
 </p>
 
-    <form method="post" action="<c:url value="/member/logout"/>">
+    <form method="post" action="<c:url value="/logout"/>">
         <input type="submit" value="로그아웃">
     </form>
 </p>

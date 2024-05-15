@@ -1,33 +1,27 @@
 package org.member.memberController;
 
-import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.member.MemberDTO;
-import org.member.UseMemberDataDTO;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Date;
-import java.util.Optional;
 
 @Slf4j
 @Controller
-@RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
-
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    private final PasswordEncoder passwordEncoder;
 
     //회원가입
     @PostMapping("/create")
-    public ModelAndView createMember(MemberDTO createMemberData, HttpSession session) throws Exception{
+    public ModelAndView createMember(MemberDTO createMemberData) throws Exception{
         //아이디 중복 검사
         if (memberService.existsByUsername(createMemberData.getUsername())) {
             throw new Exception();
@@ -38,6 +32,7 @@ public class MemberController {
         }
 
         //회원가입 진행
+        createMemberData.setPassword(passwordEncoder.encode(createMemberData.getPassword()));
         Instant registerDate = Timestamp.from(Instant.now()).toInstant();
         createMemberData.setRegisterdate(registerDate);
         log.info("Create member: " + createMemberData);
@@ -46,34 +41,7 @@ public class MemberController {
 
         ModelAndView view = new ModelAndView();
             view.addObject("message", "회원가입 성공");
-            session.setAttribute("memberDTO", createMemberData);                                                      //session
-            view.setViewName("Member/MemberPage");
-        return view;
-    }
-
-    //로그인                                                                                                              //SpringSecurity
-    @PostMapping("/login")
-    public ModelAndView readMemberByUsernmaeAndPassword(String username, String password, HttpSession session) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        Optional<MemberDTO> member = memberService.readMemberByUsernameAndPassword(username, password);
-        if(member.isPresent()){
-            UseMemberDataDTO useMemberDataDTO  = new UseMemberDataDTO(member.get().getId(), member.get().getUsername(), member.get().getEmail(), member.get().getCountry(), member.get().getArea());
-            session.setAttribute("useMemberDataDTO", useMemberDataDTO);
-            modelAndView.addObject("useMemberDataDTO", useMemberDataDTO);
-            modelAndView.setViewName("Member/MemberPage");
-            return modelAndView;
-        }
-        modelAndView.setViewName("Member/LoginPage");
-        return modelAndView;
-    }
-
-    //로그아웃                                                                                                            //SpringSecurity
-    @PostMapping("logout")
-    public ModelAndView logout(HttpSession session) {
-        session.removeAttribute("memberDTO");
-        ModelAndView view = new ModelAndView();
-        view.addObject("message", "로그아웃 성공");
-        view.setViewName("Member/LoginPage");
+            view.setViewName("Member/LoginPage");
         return view;
     }
 
@@ -93,19 +61,5 @@ public class MemberController {
     public void deleteMember(Long id) {
         memberService.deleteMember(id);
     }
-
-//    public List<MemberDTO> readAllMembers() {
-//        return memberService.readAllMembers().stream()
-//                .map(memberVO -> new MemberDTO(memberVO.getId(), memberVO.getUsername(), memberVO.getPassword(), memberVO.getEmail()))
-//                .collect(Collectors.toList());
-//    }
-//    public Optional<MemberDTO> readMemberById(Long memberId) {
-//        Optional<MemberVO> memberVO = memberService.readMemberById(memberId);
-//        MemberDTO memberDTO = new MemberDTO(memberVO.get().getId(), memberVO.get().getUsername(), memberVO.get().getPassword(), memberVO.get().getEmail());
-//        return Optional.of(memberDTO);
-//    }
-//    public Optional<MemberDTO> readMemberByEmail(String email) {
-//        return memberService.readMemberByEmail(email);
-//    }
 
 }

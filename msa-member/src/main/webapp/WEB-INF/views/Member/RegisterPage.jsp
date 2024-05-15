@@ -15,7 +15,7 @@
 <body>
 
 <h1>Main Register Page</h1>
-<form method="post" action="<c:url value='/member/create'/>">
+<form method="post" action="<c:url value='/create'/>">
     username: <input type="text" id="username" name="username"><br>
     <span id="existUsername"></span>
 
