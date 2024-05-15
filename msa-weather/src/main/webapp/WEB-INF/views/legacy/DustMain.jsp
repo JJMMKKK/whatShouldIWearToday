@@ -10,7 +10,7 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script type="text/javascript" src="<c:url value='/resources/js/DustMain.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/js/WeatherMain.js'/>"></script>
 </head>
 <body>
 
@@ -32,13 +32,14 @@
             <tr>
                 <td><c:out value="${paticulatemattervoDto.datatime}"/></td>
                 <td><c:out value="${paticulatemattervoDto.pm25grade}"/></td>
-                <td><c:out value="${paticulatemattervoDto.pm25value}"/></td>
+                <td><c:out value="${paticulatemattervoDto.pm25value}"/>㎍/㎥</td>
                 <td><c:out value="${paticulatemattervoDto.pm10grade}"/></td>
-                <td><c:out value="${paticulatemattervoDto.pm10value}"/></td>
+                <td><c:out value="${paticulatemattervoDto.pm10value}"/>㎍/㎥</td>
             </tr>
         </tbody>
     </table>
 </p>
+* 점검 등으로 인해 미세먼지 상태나 수치가 제대로 표기되지 않을 수 있습니다.
 
 <p>
     <form id="DustRequest" action="<c:url value='/dustRequest'/>" method="POST">

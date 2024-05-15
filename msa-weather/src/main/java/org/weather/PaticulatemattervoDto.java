@@ -12,6 +12,10 @@ import java.io.Serializable;
  */
 @Data
 public class PaticulatemattervoDto implements Serializable {
+
+    @Size(max = 50)
+    String stationname;
+
     @NotNull
     @Size(max = 50)
     String sidoname;
@@ -19,10 +23,6 @@ public class PaticulatemattervoDto implements Serializable {
     @NotNull
     @Size(max = 50)
     String datatime;
-
-    @NotNull
-    @Size(max = 50)
-    String stationname;
 
     @Size(max = 50)
     String pm25grade;
@@ -44,29 +44,21 @@ public class PaticulatemattervoDto implements Serializable {
 
     public void setPm25grade(String pm25grade) {
         this.pm25grade = switch (pm25grade){
-            case "1" -> "좋음";
-            case "2" -> "보통";
-            case "3" -> "나쁨";
-            case "4" -> "매우나쁨";
+            case "1", "좋음" -> "좋음";
+            case "2", "보통" -> "보통";
+            case "3", "나쁨" -> "나쁨";
+            case "4", "매우나쁨" -> "매우나쁨";
             default -> "점검 중";
         };
-    }
-
-    public void setPm25value(String pm25value) {
-        this.pm25value = pm25value + "㎍/㎥";
     }
 
     public void setPm10grade(String pm10grade) {
         this.pm10grade = switch (pm10grade){
-            case "1" -> "좋음";
-            case "2" -> "보통";
-            case "3" -> "나쁨";
-            case "4" -> "매우나쁨";
+            case "1", "좋음" -> "좋음";
+            case "2", "보통" -> "보통";
+            case "3", "나쁨" -> "나쁨";
+            case "4", "매우나쁨" -> "매우나쁨";
             default -> "점검 중";
         };
-    }
-
-    public void setPm10value(String pm10value) {
-        this.pm10value = pm10value + "㎍/㎥";
     }
 }

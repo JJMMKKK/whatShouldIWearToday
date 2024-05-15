@@ -7,8 +7,14 @@
 7. 폼 데이터에 사용되는 데이터를 include 등의 작업을 통해 가시성 향상
 8. country를 고르고 area를 고르는 방식으로 변경(확장성 고려)
 9. 지역 명을 아스키 코드로 자동 변환하도록 설계
-10. delete & save -> saveAll
+##10. delete & save -> saveAll
+--> serial id로 인해 결국 deleteAll 후에 saveAll을 해야 제대로 들어가짐
+--> 안 그러면 데이터 확인 -> 있으면 갱신 / 없으면 삽입이라는 과정을 사용해야 함(save를 사용해야 하는 것은 덤)
+--> 그런데 데이터가 어차피 그렇게 많지 않으면 확인 후 갱신 / 삽입 과정을 거쳐도 좋지 않을까?
 
 지금 당장은 delete & save를 사용하고 있지만 saveAll로 변환할 예정
 saveAll에 사용되는 List는 flag컬럼이 null인 경우에만 포함되도록 변경할 것
 또한 DB의 Table의 Id 역시 바꿔야 할 것이다. 숫자로 하던가, 아니면 다른 명칭을 사용하던가
+
+11. 미세먼지DB와 place DB의 데이터가 불일치
+12. include에 사용되는 jsp 코드 정보 정리

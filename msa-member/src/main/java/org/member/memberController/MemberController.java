@@ -3,11 +3,15 @@ package org.member.memberController;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.member.MemberDTO;
+import org.member.UseMemberDataDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 @Slf4j
@@ -32,7 +36,12 @@ public class MemberController {
         if (memberService.existsByEmail(createMemberData.getEmail())) {
             throw new Exception();
         }
+
         //회원가입 진행
+        Instant registerDate = Timestamp.from(Instant.now()).toInstant();
+        createMemberData.setRegisterdate(registerDate);
+        log.info("Create member: " + createMemberData);
+
         memberService.createMember(createMemberData);
 
         ModelAndView view = new ModelAndView();
@@ -44,13 +53,13 @@ public class MemberController {
 
     //로그인                                                                                                              //SpringSecurity
     @PostMapping("/login")
-    public ModelAndView readMemberByUsernmaeAndPassword(String username, String password, HttpSession session) {
+    public ModelAndView readMemberByUsernmaeAndPassword(String username, String password, HttpSession session) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         Optional<MemberDTO> member = memberService.readMemberByUsernameAndPassword(username, password);
         if(member.isPresent()){
-            MemberDTO memberDTO = new MemberDTO(member.get().getId(), member.get().getUsername(), member.get().getPassword(), member.get().getEmail());
-            session.setAttribute("memberDTO", memberDTO);
-            modelAndView.addObject("memberDTO", memberDTO);
+            UseMemberDataDTO useMemberDataDTO  = new UseMemberDataDTO(member.get().getId(), member.get().getUsername(), member.get().getEmail(), member.get().getCountry(), member.get().getArea());
+            session.setAttribute("useMemberDataDTO", useMemberDataDTO);
+            modelAndView.addObject("useMemberDataDTO", useMemberDataDTO);
             modelAndView.setViewName("Member/MemberPage");
             return modelAndView;
         }

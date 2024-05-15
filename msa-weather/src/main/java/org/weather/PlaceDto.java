@@ -2,6 +2,7 @@ package org.weather;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 /**
  * DTO for {@link Place}
  */
+@Data
 @Value
 public class PlaceDto implements Serializable {
 

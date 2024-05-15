@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.weather.WeatherDataDTO;
 import org.weather.WeatherareavoDTO;
@@ -17,9 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -34,18 +33,13 @@ public class WeatherApiController {
     @Value("${weather.api.key}")
     String weatherApiKey;
 
-    @GetMapping("/weatherMain")
-    public String WeatherMain(){
-        return "WeatherMain";
-    }
-
+    @ResponseBody
     @PostMapping("/weatherRequest")
-    public ModelAndView weatherRequest(WeatherareavoDTO weatherareavoDTO){
+    public Map<String, Object> weatherRequest(WeatherareavoDTO weatherareavoDTO){
 
         String area = weatherareavoDTO.getArea();
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("area", area);
+        Map<String, Object> returnMap = new HashMap<>();
+            returnMap.put("area", area);
 
         //위도와 경도 가져오기
         Map position = weatherApiService.weatherRequest(area);
@@ -104,14 +98,14 @@ public class WeatherApiController {
 
             //가공된 데이터 출력
             //log.info("WeatherDataDTOList: {}", weatherDataDTOList);
-            modelAndView.addObject("weatherDataDTOList", weatherDataDTOList);
+            returnMap.put("weatherDataTime", weatherDataDTOList.get(0).getBaseTime().substring(0, 2));
+            returnMap.put("weatherDataDTOList", weatherDataDTOList);
 
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
 
-        modelAndView.setViewName("WeatherMain");
-        return modelAndView;
+        return returnMap;
     }
 }
 

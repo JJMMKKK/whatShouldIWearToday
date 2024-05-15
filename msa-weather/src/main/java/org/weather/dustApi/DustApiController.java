@@ -1,6 +1,7 @@
 package org.weather.dustApi;
 
-import ch.qos.logback.core.model.Model;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,8 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.weather.PaticulatemattervoDto;
+import org.weather.PlaceDto;
 import org.weather.place.PlaceService;
 
 import java.io.BufferedReader;
@@ -22,34 +26,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 public class DustApiController {
 
     private final DustApiService dustApiService;
     private final PlaceService placeService;
 
-    private DustApiController(DustApiService dustApiService, PlaceService placeService){
-        this.dustApiService = dustApiService;
-        this.placeService = placeService;
-    }
-
     @Value("${dust.api.key}")
     private String apiKey;
 
-    @GetMapping("/dustMain")
-    public ModelAndView dustMain(){
-        String country = "경기";
-        String area = "용인시수지구";
-        String Stationname = placeService.findStationnameByCountryAndArea(country, area);
-        PaticulatemattervoDto paticulatemattervoDto = dustApiService.findByStationname(Stationname);
-        ModelAndView mav = new ModelAndView("DustMain");
-        mav.addObject("paticulatemattervoDto", paticulatemattervoDto);
-        mav.addObject("area", area);
-        return mav;
+    @ResponseBody
+    @PostMapping("/dustRequestAjax")
+    public PaticulatemattervoDto dustRequestAjax(String country, String area){
+        PlaceDto placeDto = placeService.findByCountryAndArea(country, area);
+        return dustApiService.findByStationname(placeDto);
     }
 
-    @PostMapping("/dustRequest")
-    public String dustRequest() throws IOException, JSONException {
+    @PostConstruct
+    public void init()  throws IOException, JSONException {
 
             String country = "%EA%B2%BD%EA%B8%B0";  // 한글이 아스키코드로 변환되어야 함
 
@@ -105,9 +100,6 @@ public class DustApiController {
             //log.info("particulateMatterList: {}", paticulateMatterList.toString());
 
             dustApiService.dustRequest(paticulateMatterList);
-
-        return "redirect:/dustMain";
+            log.info("DB에 "+"경기"+" 지역 미세먼지 데이터 저장 완료");
     }
-
-
 }

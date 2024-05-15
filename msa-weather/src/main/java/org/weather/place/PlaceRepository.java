@@ -7,5 +7,5 @@ import org.weather.Place;
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
 
-    Place findStationnameByCountryAndArea(String country, String area);
+    Place findByCountryAndArea(String country, String area);
 }

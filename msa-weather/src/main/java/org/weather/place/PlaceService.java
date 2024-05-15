@@ -2,6 +2,7 @@ package org.weather.place;
 
 import org.springframework.stereotype.Service;
 import org.weather.Place;
+import org.weather.PlaceDto;
 
 @Service
 public class PlaceService {
@@ -11,8 +12,8 @@ public class PlaceService {
         this.placeRepository = placeRepository;
     }
 
-    public String findStationnameByCountryAndArea(String country, String area) {
-        Place place = placeRepository.findStationnameByCountryAndArea(country, area);
-        return place.getStationName();
+    public PlaceDto findByCountryAndArea(String country, String area) {
+        Place place = placeRepository.findByCountryAndArea(country, area);
+        return new PlaceDto(place.getCountry(), place.getArea(), place.getStationName());
     }
 }

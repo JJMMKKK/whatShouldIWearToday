@@ -1,44 +1,40 @@
 package org.weather.dustApi;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.weather.Paticulatemattervo;
 import org.weather.PaticulatemattervoDto;
+import org.weather.PlaceDto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class DustApiService {
 
-    private final DustApiRepository apiRepository;
-    public DustApiService(DustApiRepository apiRepository) {
-        this.apiRepository = apiRepository;
-    }
+    private final DustApiRepository dustApiRepository;
 
-    public void dustRequest(List<PaticulatemattervoDto> paticulateMatterList) {
-
-        for(PaticulatemattervoDto dto : paticulateMatterList) {
-            Paticulatemattervo paticulatemattervo = new Paticulatemattervo();
-            BeanUtils.copyProperties(dto, paticulatemattervo);
-
-            if(paticulatemattervo.getPm10flag() == null || paticulatemattervo.getPm25flag() == null) {
-//                apiRepository.updateSidonameAndDatatimeAndStationnameAndPm25gradeAndPm25flagAndPm25valueAndPm10gradeAndPm10flagAndPm10valueBy(
-//                        paticulatemattervo.getSidoname(), paticulatemattervo.getDatatime(),paticulatemattervo.getStationname(),
-//                        paticulatemattervo.getPm25grade(),paticulatemattervo.getPm25flag(),paticulatemattervo.getPm25value(),
-//                        paticulatemattervo.getPm10grade(),paticulatemattervo.getPm10flag(),paticulatemattervo.getPm10value());
-
-                apiRepository.deleteByStationname(paticulatemattervo.getStationname());
-                apiRepository.save(paticulatemattervo);
-            }
-        }
-    }
-
-    public PaticulatemattervoDto findByStationname(String stationname) {
-        Paticulatemattervo paticulatemattervo = apiRepository.findByStationname(stationname);
+    public PaticulatemattervoDto findByStationname(PlaceDto placeDto) {
+        Paticulatemattervo paticulatemattervo = dustApiRepository.findBysidonameAndStationname(placeDto.getCountry(), placeDto.getStationName());
         PaticulatemattervoDto paticulatemattervoDto = new PaticulatemattervoDto();
         BeanUtils.copyProperties(paticulatemattervo, paticulatemattervoDto);
         return paticulatemattervoDto;
+    }
+
+    @Transactional
+    public void dustRequest(List<PaticulatemattervoDto> paticulateMatterDtoList) {
+        List<Paticulatemattervo> paticulatemattervoList = new ArrayList<>();
+        for (PaticulatemattervoDto dto : paticulateMatterDtoList) {
+                    Paticulatemattervo paticulatemattervo = new Paticulatemattervo();
+                    BeanUtils.copyProperties(dto, paticulatemattervo);
+                    paticulatemattervoList.add(paticulatemattervo);
+        }
+        log.info("paticulatemattervoList: {}", paticulatemattervoList);
+        dustApiRepository.saveAll(paticulatemattervoList);
     }
 }

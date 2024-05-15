@@ -23,7 +23,7 @@
     <input type="button" id="showClothField" value="옷 수정하기">
     <div id="clothField" style="display: none">
         <form id="clothSaveField">
-            <input type="hidden" id="userid" value="${sessionScope.memberDTO.id}">
+            <input type="hidden" id="userid" value="${sessionScope.useMemberDataDTO.id}">
             <input type="text" id="cloth" name="cloth">
             <select id="categoryForCloth">
                 <option value="모자">모자</option>
