@@ -48,14 +48,14 @@ subprojects {
 		implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
 		implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
 
-//		//SpringSecurity
-//		implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
-//		implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-//		implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//		implementation 'org.springframework.boot:spring-boot-starter-security'
-//
-//		//jjwt
-//		implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+		//SpringSecurity
+		implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
+		implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+		implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+
+		//jjwt
+		implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
 
 		//lombock
 		compileOnly 'org.projectlombok:lombok:1.18.22'
