@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.weather.PQ;
 import org.weather.PaticulatemattervoDto;
 import org.weather.PlaceDto;
 import org.weather.place.PlaceService;
@@ -41,6 +43,15 @@ public class DustApiController {
     public PaticulatemattervoDto dustRequestAjax(String country, String area){
         PlaceDto placeDto = placeService.findByCountryAndArea(country, area);
         return dustApiService.findByStationname(placeDto);
+    }
+
+    //GPT 질문용
+    @ResponseBody
+    @PostMapping("/selectDustDataForQuestionToGPT")
+    public PQ selectDustDataForQuestionToGPT(String country, String area){
+        PlaceDto placeDto = placeService.findByCountryAndArea(country, area);
+        PQ pq = dustApiService.selectDustDataForQuestionToGPT(placeDto);
+        return pq;
     }
 
     @PostConstruct
