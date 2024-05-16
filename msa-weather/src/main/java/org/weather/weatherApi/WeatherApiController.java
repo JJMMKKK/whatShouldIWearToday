@@ -1,5 +1,6 @@
 package org.weather.weatherApi;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.weather.WQ;
 import org.weather.WeatherDataDTO;
 import org.weather.WeatherareavoDTO;
 
@@ -38,25 +40,58 @@ public class WeatherApiController {
     public Map<String, Object> weatherRequest(WeatherareavoDTO weatherareavoDTO){
 
         String area = weatherareavoDTO.getArea();
+        List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
+            String weatherDataTime = weatherDataDTOList.get(0).getBaseTime().substring(0, 2);
+
         Map<String, Object> returnMap = new HashMap<>();
             returnMap.put("area", area);
+            returnMap.put("weatherDataTime", weatherDataTime);
+            returnMap.put("weatherDataDTOList", weatherDataDTOList);
+
+        log.info("area: {}, weatherDataTime: {}시, weatherDataDTOList: {}", area, weatherDataTime, weatherDataDTOList);
+
+        return returnMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/selectWeatherDataForQuestionToGPT")
+    public List<WQ> selectWeatherDataForQuestionToGPT(WeatherareavoDTO weatherareavoDTO){
+
+        List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
+
+        List<WQ> wqList = new ArrayList<>();
+        for(WeatherDataDTO weatherDataDTO : weatherDataDTOList){
+            WQ wq = new WQ();
+            BeanUtils.copyProperties(weatherDataDTO, wq);
+            wqList.add(wq);
+        }
+
+        log.info("wqList: {}", wqList);
+        return wqList;
+    }
+
+
+    private List<WeatherDataDTO> connectToWeatherApi(WeatherareavoDTO weatherareavoDTO){
+
+        String area = weatherareavoDTO.getArea();
 
         //위도와 경도 가져오기
         Map position = weatherApiService.weatherRequest(area);
+        List<WeatherDataDTO> weatherDataDTOList = new ArrayList<>();
 
         try {
 
-        //api 요청을 위한 url 구성
-        String stringURL =
-            "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst" +
-                "?serviceKey=" + weatherApiKey +
-                "&numOfRows=10" +
-                "&pageNo=1" +
-                "&dataType=JSON" +
-                "&base_date=" + weatherareavoDTO.getBase_date() +
-                "&base_time=" + weatherareavoDTO.getBase_time() +
-                "&nx="+ position.get("nx") +
-                "&ny="+ position.get("ny");
+            //api 요청을 위한 url 구성
+            String stringURL =
+                    "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst" +
+                            "?serviceKey=" + weatherApiKey +
+                            "&numOfRows=10" +
+                            "&pageNo=1" +
+                            "&dataType=JSON" +
+                            "&base_date=" + weatherareavoDTO.getBase_date() +
+                            "&base_time=" + weatherareavoDTO.getBase_time() +
+                            "&nx="+ position.get("nx") +
+                            "&ny="+ position.get("ny");
 
             //url로 HTTP Request
             URL url = new URL(stringURL);
@@ -71,17 +106,16 @@ public class WeatherApiController {
             String response = String.join("/n", bufferedReader.lines().toList());
             bufferedReader.close();
             connection.disconnect();
-            
+
             //JSON 데이터 출력(원본)
             //log.info("Response: {}", response);
-            
+
             //JSON 데이터에서 필요한 데이터 추출
             JSONObject jsonObject = new JSONObject(response);
             JSONObject items = jsonObject.getJSONObject("response").getJSONObject("body").getJSONObject("items");
             JSONArray itemsArray = items.getJSONArray("item");
 
             //DTO로 구성된 List 생성
-            List<WeatherDataDTO> weatherDataDTOList = new ArrayList<>();
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject item = itemsArray.getJSONObject(i);
                 String baseTime = item.getString("baseTime");
@@ -89,23 +123,16 @@ public class WeatherApiController {
                 String fcstValue = item.getString("fcstValue");
 
                 //DTO 데이터 재구성
-                WeatherDataDTO weatherDataDTO = new WeatherDataDTO();
-                    weatherDataDTO.setBaseTime(baseTime);
-                    weatherDataDTO.setCategory(category);
-                    weatherDataDTO.setFcstValue(category, fcstValue);
+                org.weather.WeatherDataDTO weatherDataDTO = new org.weather.WeatherDataDTO();
+                weatherDataDTO.setBaseTime(baseTime);
+                weatherDataDTO.setCategory(category);
+                weatherDataDTO.setFcstValue(category, fcstValue);
                 weatherDataDTOList.add(weatherDataDTO);
             }
-
-            //가공된 데이터 출력
-            //log.info("WeatherDataDTOList: {}", weatherDataDTOList);
-            returnMap.put("weatherDataTime", weatherDataDTOList.get(0).getBaseTime().substring(0, 2));
-            returnMap.put("weatherDataDTOList", weatherDataDTOList);
-
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
 
-        return returnMap;
+        return weatherDataDTOList;
     }
 }
-

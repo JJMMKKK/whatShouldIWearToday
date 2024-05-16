@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.weather.PQ;
 import org.weather.Paticulatemattervo;
 import org.weather.PaticulatemattervoDto;
 import org.weather.PlaceDto;
@@ -24,6 +25,14 @@ public class DustApiService {
         PaticulatemattervoDto paticulatemattervoDto = new PaticulatemattervoDto();
         BeanUtils.copyProperties(paticulatemattervo, paticulatemattervoDto);
         return paticulatemattervoDto;
+    }
+
+    public PQ selectDustDataForQuestionToGPT(PlaceDto placeDto) {
+        Paticulatemattervo paticulatemattervo = dustApiRepository.findBysidonameAndStationname(placeDto.getCountry(), placeDto.getStationName());
+        PQ pq = new PQ();
+            BeanUtils.copyProperties(paticulatemattervo, pq);
+            log.info("pq: {}", pq);
+        return pq;
     }
 
     @Transactional
