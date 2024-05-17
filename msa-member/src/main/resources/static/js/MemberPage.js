@@ -7,7 +7,7 @@ $(function(){
     viewMyClothes();
     timeDataSetting();
     viewTodayWeather();
-    viewTodayDust();
+    //viewTodayDust();
     viewGptAnswer();
 
 
@@ -199,24 +199,48 @@ function viewTodayDust(){
 }
 function viewGptAnswer(){
     const userid = $("#userid").val()
+    const username = $("#username").val()
     const base_date = $("#base_date").val();
     const base_time = $("#base_time").val();
     const country = $("#country").val();
     const area = $("#area").val();
+
     const response_gptData = $("#response_gptData")
+    const response_dustData = $("#response_dustData")
 
     $.ajax({
         type: "post",
         url: "/viewGptAnswer",
         data: {
             userid: userid,
+            username: username,
             country: country,
             area: area,
             base_date: base_date,
             base_time: base_time
         },
         success: function(response){
-            response_gptData.html(response);
+            console.log(response)
+
+            const clothData = response[0];
+            const dustData = response[1];
+
+            let clothTable = '<table>';
+            clothTable += '<tr><th>항목</th><th>내용</th></tr>';
+            for (const key in clothData) {
+                clothTable += `<tr><td>${key}: </td><td>${clothData[key]}</td></tr>`;
+            }
+            clothTable += '</table>';
+
+            let dustTable = '<table>';
+            dustTable += '<tr><th>항목</th><th>내용</th></tr>';
+            for (const key in dustData) {
+                dustTable += `<tr><td>${key}: </td><td>${dustData[key]}</td></tr>`;
+            }
+            dustTable += '</table>';
+
+            response_gptData.html(clothTable);
+            response_dustData.html(dustTable);
         },
         error: function(){
             console.log("GPT 답변 ajax 에러")

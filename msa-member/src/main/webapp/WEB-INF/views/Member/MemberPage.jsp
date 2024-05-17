@@ -1,4 +1,4 @@
-<%@ page import="org.core.MemberVO" %>
+<%@ page import="org.core.vo.MemberVO" %>
 <%@ page import="org.member.MemberDTO" %>
 <%@ page import="org.member.ClothDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -20,6 +20,7 @@
     <h4 id="response_area"></h4>
     <h4 id="response_time"></h4>
     <input type="hidden" id="userid" value="<c:out value="${useMemberDataDTO.id}"/>">
+    <input type="hidden" id="username" value="<c:out value="${useMemberDataDTO.username}"/>">
     <input type="hidden" id="country" value="<c:out value="${useMemberDataDTO.country}"/>">
     <input type="hidden" id="area" value="<c:out value="${useMemberDataDTO.area}"/>">
     <input type="hidden" id="base_date" name="base_date">

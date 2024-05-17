@@ -1,19 +1,23 @@
 package org.member.restController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.core.WeatherareavoDTO;
+import org.core.dto.WeatherareavoDTO;
 import org.member.CQ;
 import org.member.clothController.ClothController;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,8 +27,9 @@ import java.util.Objects;
 public class MemberRestController {
 
     private final MemberRestService memberRestService;
-    private final RestTemplate restTemplate;
     private final ClothController clothController;
+    private final ObjectMapper objectMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("AjaxExistByUsername")
     public boolean ajaxExistByUsername(String username) {
@@ -36,20 +41,26 @@ public class MemberRestController {
         return memberRestService.existsByEmail(email);
     }
 
-    @PostMapping("viewGptAnswer")
-    public String viewGptAnswer(WeatherareavoDTO weatherareavoDTO, Integer userid) {
+    @PostMapping("/viewGptAnswer")
+    public List viewGptAnswer(WeatherareavoDTO weatherareavoDTO, Integer userid, String username) throws JsonProcessingException {
+
         List<CQ> clothForQuestionToGPTDTOS = clothController.selectClothDataForQuestionToGPT(userid);
-        String url = "http://localhost:9002/selectWeatherDataForQuestionToGPT";
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        String weatherUrl = "http://localhost:9002/selectWeatherDataForQuestionToGPT";
+        List<Object> answerByWeatherList = memberRestService.viewWeatherAnswer(weatherUrl, weatherareavoDTO, clothForQuestionToGPTDTOS, username);
 
-        HttpEntity<WeatherareavoDTO> requestEntity = new HttpEntity<>(weatherareavoDTO, headers);
-
-        ResponseEntity<List> response = restTemplate.postForEntity(url, requestEntity, List.class);
-        log.info(Objects.requireNonNull(response.getBody()).toString());
-
-        return null;
+        String gptUrl = "http://localhost:9003/askToGpt";
+        String answerByGpt = memberRestService.viewGptAnswer(gptUrl, answerByWeatherList);
+        return objectMapper.readValue(answerByGpt, List.class);
     }
 
+    @PostMapping("/loginAjax")
+    public boolean loginAjax(String username, String password) {
+
+        String encodedPassword = memberRestService.findPasswordByUsername(username);
+        if(encodedPassword == null || encodedPassword.isEmpty()) {
+            return false;
+        }
+        return passwordEncoder.matches(password, encodedPassword);
+    }
 }

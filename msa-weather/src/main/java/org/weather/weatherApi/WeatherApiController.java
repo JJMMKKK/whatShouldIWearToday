@@ -1,7 +1,6 @@
 package org.weather.weatherApi;
 
 import lombok.RequiredArgsConstructor;
-import org.core.CoreService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -11,11 +10,12 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.weather.PQ;
 import org.weather.WQ;
 import org.weather.WeatherDataDTO;
-import org.core.WeatherareavoDTO;
+import org.core.dto.WeatherareavoDTO;
 import org.weather.dustApi.DustApiController;
 
 import java.io.BufferedReader;
@@ -77,9 +77,7 @@ public class WeatherApiController {
     @CrossOrigin(origins = "http://localhost:9001")
     @ResponseBody
     @PostMapping("/selectWeatherDataForQuestionToGPT")
-    public List<Object> selectWeatherDataForQuestionToGPT(WeatherareavoDTO weatherareavoDTO){
-
-        log.info("weatherareavoDTO: {}", weatherareavoDTO);
+    public List<Object> selectWeatherDataForQuestionToGPT(@RequestBody WeatherareavoDTO weatherareavoDTO) {
         List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
         List<WQ> wqList = new ArrayList<>();
         for(WeatherDataDTO weatherDataDTO : weatherDataDTOList){
@@ -87,15 +85,12 @@ public class WeatherApiController {
             BeanUtils.copyProperties(weatherDataDTO, wq);
             wqList.add(wq);
         }
-        log.info("wqList: {}", wqList);
-
         PQ pqList = dustApiController.selectDustDataForQuestionToGPT(weatherareavoDTO.getCountry(), weatherareavoDTO.getArea());
         List<Object> returnList = new ArrayList<>();
             returnList.add(pqList);
             returnList.add(wqList);
         return returnList;
     }
-
 
     private List<WeatherDataDTO> connectToWeatherApi(WeatherareavoDTO weatherareavoDTO){
 
