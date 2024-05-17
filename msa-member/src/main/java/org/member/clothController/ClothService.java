@@ -2,7 +2,7 @@ package org.member.clothController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.core.MemberVO;
+import org.core.vo.MemberVO;
 import org.member.ClothDTO;
 import org.member.CQ;
 import org.member.ClothVO;

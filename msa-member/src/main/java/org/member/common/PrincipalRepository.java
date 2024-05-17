@@ -1,6 +1,6 @@
 package org.member.common;
 
-import org.core.MemberVO;
+import org.core.vo.MemberVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

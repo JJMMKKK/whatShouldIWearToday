@@ -2,12 +2,10 @@ package org.member.memberController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.core.MemberVO;
+import org.core.vo.MemberVO;
 import org.member.MemberDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j

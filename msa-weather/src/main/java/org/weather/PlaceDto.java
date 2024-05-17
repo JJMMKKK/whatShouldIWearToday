@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import org.core.Place;
+import org.core.vo.Place;
 
 import java.io.Serializable;
 

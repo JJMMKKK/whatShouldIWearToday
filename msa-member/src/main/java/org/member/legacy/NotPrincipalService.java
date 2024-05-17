@@ -2,7 +2,7 @@
 //
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
-//import org.core.UseMemberDataDTO;
+//import org.core.dto.UseMemberDataDTO;
 //import org.member.MemberVO;
 //import org.springframework.beans.BeanUtils;
 //import org.springframework.stereotype.Service;

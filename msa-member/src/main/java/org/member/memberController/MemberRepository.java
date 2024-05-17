@@ -1,7 +1,6 @@
 package org.member.memberController;
 
-import org.core.MemberVO;
-import org.member.MemberDTO;
+import org.core.vo.MemberVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

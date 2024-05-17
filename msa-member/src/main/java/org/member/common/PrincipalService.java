@@ -2,8 +2,8 @@ package org.member.common;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.core.MemberVO;
-import org.core.UseMemberDataDTO;
+import org.core.vo.MemberVO;
+import org.core.dto.UseMemberDataDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
