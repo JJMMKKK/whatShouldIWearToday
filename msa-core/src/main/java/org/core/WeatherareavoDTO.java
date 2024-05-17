@@ -1,17 +1,12 @@
-package org.weather;
+package org.core;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Value;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link Weatherareavo}
- */
 @Data
-@Value
 public class WeatherareavoDTO implements Serializable {
 
     @NotNull

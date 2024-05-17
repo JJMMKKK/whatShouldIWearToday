@@ -20,5 +20,4 @@ public class MainController {
             mav.setViewName("WDMain");
         return mav;
     }
-
 }

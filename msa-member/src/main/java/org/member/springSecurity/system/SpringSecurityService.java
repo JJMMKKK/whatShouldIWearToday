@@ -2,8 +2,8 @@ package org.member.springSecurity.system;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.core.MemberVO;
 import org.member.MemberDTO;
-import org.member.MemberVO;
 import org.member.memberController.MemberRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UserDetails;

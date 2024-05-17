@@ -35,10 +35,7 @@ public class ClothController {
     }
 
     //질문용 옷 불러오기 메서드
-    @PostMapping("/selectClothDataForQuestionToGPT")
     public List<CQ> selectClothDataForQuestionToGPT(Integer userid){
-        List<CQ> clothForQuestionToGPTDTOS = clothService.selectClothDataForQuestionToGPT(userid);
-        log.info("clothForQuestionToGPTDTOS: {}", clothForQuestionToGPTDTOS);
-        return clothForQuestionToGPTDTOS;
+        return clothService.selectClothDataForQuestionToGPT(userid);
     }
 }

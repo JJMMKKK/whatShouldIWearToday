@@ -1,4 +1,4 @@
-<%@ page import="org.member.MemberVO" %>
+<%@ page import="org.core.MemberVO" %>
 <%@ page import="org.member.MemberDTO" %>
 <%@ page import="org.member.ClothDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

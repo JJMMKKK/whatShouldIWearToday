@@ -1,6 +1,6 @@
 package org.member.utilController;
 
-import org.member.Place;
+import org.core.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package org.member.utilController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.member.Place;
+import org.core.Place;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

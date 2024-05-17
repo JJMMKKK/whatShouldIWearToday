@@ -18,3 +18,7 @@ saveAll에 사용되는 List는 flag컬럼이 null인 경우에만 포함되도�
 
 11. 미세먼지DB와 place DB의 데이터가 불일치
 12. include에 사용되는 jsp 코드 정보 정리
+13. GPT 답변을 매일 6시간 간격으로 생성
+    이후 정보 불러 올 때 최신 답변을 DB에서 불러옴
+14. Kafka를 사용하여 모듈 간 통신(메시징 시스템 활용)
+15. 공통 configuration 사용

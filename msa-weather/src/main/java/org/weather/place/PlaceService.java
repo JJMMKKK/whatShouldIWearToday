@@ -1,7 +1,7 @@
 package org.weather.place;
 
 import org.springframework.stereotype.Service;
-import org.weather.Place;
+import org.core.Place;
 import org.weather.PlaceDto;
 
 @Service

@@ -46,12 +46,17 @@ subprojects {
 		implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
 		implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
 
+		//jjwt
+		implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+
 		//lombock
 		compileOnly 'org.projectlombok:lombok:1.18.22'
 		annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
 		runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 		runtimeOnly 'org.postgresql:postgresql'
+		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
 
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
@@ -68,7 +73,6 @@ subprojects {
 project(':msa-core'){
 	bootJar.enabled = false
 	jar.enabled = true
-
 }
 
 project(':msa-member'){
@@ -81,12 +85,6 @@ project(':msa-member'){
 		implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 		implementation 'org.springframework.boot:spring-boot-starter-security'
 
-		//jjwt
-		implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
-
-		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
-		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
-
 		testImplementation 'org.springframework.security:spring-security-test'
 	}
 }
@@ -98,7 +96,6 @@ project(':msa-gpt'){
 }
 
 project(':msa-weather'){
-
 	dependencies {
 		implementation project(':msa-core')
 	}

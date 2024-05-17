@@ -1,6 +1,6 @@
 package org.member.restController;
 
-import org.member.MemberVO;
+import org.core.MemberVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

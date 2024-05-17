@@ -1,5 +1,7 @@
 package org.weather.weatherApi;
 
+import lombok.RequiredArgsConstructor;
+import org.core.CoreService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -7,13 +9,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.weather.PQ;
 import org.weather.WQ;
 import org.weather.WeatherDataDTO;
-import org.weather.WeatherareavoDTO;
+import org.core.WeatherareavoDTO;
+import org.weather.dustApi.DustApiController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,13 +27,11 @@ import java.util.*;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class WeatherApiController {
 
     private final WeatherApiService weatherApiService;
-
-    private WeatherApiController(WeatherApiService weatherApiService){
-        this.weatherApiService = weatherApiService;
-    }
+    private final DustApiController dustApiController;
 
     @Value("${weather.api.key}")
     String weatherApiKey;
@@ -48,26 +49,51 @@ public class WeatherApiController {
             returnMap.put("weatherDataTime", weatherDataTime);
             returnMap.put("weatherDataDTOList", weatherDataDTOList);
 
-        log.info("area: {}, weatherDataTime: {}시, weatherDataDTOList: {}", area, weatherDataTime, weatherDataDTOList);
+        log.info("weatherRequest area: {}, weatherDataTime: {}시, weatherDataDTOList: {}", area, weatherDataTime, weatherDataDTOList);
 
         return returnMap;
     }
 
+    @CrossOrigin(origins = "http://localhost:9001")
     @ResponseBody
-    @PostMapping("/selectWeatherDataForQuestionToGPT")
-    public List<WQ> selectWeatherDataForQuestionToGPT(WeatherareavoDTO weatherareavoDTO){
+    @PostMapping("/viewTodayWeather")
+    public Map<String, Object> viewTodayWeather(WeatherareavoDTO weatherareavoDTO){
+
+        String area = weatherareavoDTO.getArea();
 
         List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
+        String weatherDataTime = weatherDataDTOList.get(0).getBaseTime().substring(0, 2);
 
+        Map<String, Object> returnMap = new HashMap<>();
+        returnMap.put("area", area);
+        returnMap.put("weatherDataTime", weatherDataTime);
+        returnMap.put("weatherDataDTOList", weatherDataDTOList);
+
+        log.info("viewTodayWeather area: {}, weatherDataTime: {}시, weatherDataDTOList: {}", area, weatherDataTime, weatherDataDTOList);
+
+        return returnMap;
+    }
+
+    @CrossOrigin(origins = "http://localhost:9001")
+    @ResponseBody
+    @PostMapping("/selectWeatherDataForQuestionToGPT")
+    public List<Object> selectWeatherDataForQuestionToGPT(WeatherareavoDTO weatherareavoDTO){
+
+        log.info("weatherareavoDTO: {}", weatherareavoDTO);
+        List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
         List<WQ> wqList = new ArrayList<>();
         for(WeatherDataDTO weatherDataDTO : weatherDataDTOList){
             WQ wq = new WQ();
             BeanUtils.copyProperties(weatherDataDTO, wq);
             wqList.add(wq);
         }
-
         log.info("wqList: {}", wqList);
-        return wqList;
+
+        PQ pqList = dustApiController.selectDustDataForQuestionToGPT(weatherareavoDTO.getCountry(), weatherareavoDTO.getArea());
+        List<Object> returnList = new ArrayList<>();
+            returnList.add(pqList);
+            returnList.add(wqList);
+        return returnList;
     }
 
 

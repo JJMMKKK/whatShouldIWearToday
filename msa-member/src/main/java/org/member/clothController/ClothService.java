@@ -2,10 +2,10 @@ package org.member.clothController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.core.MemberVO;
 import org.member.ClothDTO;
 import org.member.CQ;
 import org.member.ClothVO;
-import org.member.MemberVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class ClothService {
     //옷 불러오기 메서드
     public List<ClothDTO> findAllByUserid(Integer userid) {
         MemberVO member = new MemberVO();
-            member.setId(userid);
+        member.setId(userid);
         List<ClothVO> clothVOList = idRepository.findAllByMemberVO(member);
         List<ClothDTO> clothDTOList = new ArrayList<>(clothVOList.size());
         for (ClothVO clothVO : clothVOList) {
@@ -57,7 +57,7 @@ public class ClothService {
     //질문용 옷 불러오기 메서드
     public List<CQ> selectClothDataForQuestionToGPT(Integer userid) {
         MemberVO member = new MemberVO();
-            member.setId(userid);
+        member.setId(userid);
         List<ClothVO> clothVOList = idRepository.findAllByMemberVO(member);
         List<CQ> clothForQuestionToGPTDTOS = new ArrayList<>();
         for (ClothVO clothVO : clothVOList) {

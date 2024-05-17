@@ -1,4 +1,4 @@
-package org.member;
+package org.core;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
