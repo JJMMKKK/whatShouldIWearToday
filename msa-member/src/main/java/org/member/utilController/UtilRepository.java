@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface UtilRepository extends JpaRepository<Place, Integer> {
 
-    List<Place> findAreaByCountry(String country);
+    List<Place> findByCountry(String country);
 }

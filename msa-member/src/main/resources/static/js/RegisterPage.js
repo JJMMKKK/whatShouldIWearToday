@@ -1,8 +1,8 @@
 $(function(){
 
-    // 지역에 따른 위치 출력
-    changeAreaByCountry()
-
+    // 지역 출력
+    viewSelectableCountry();
+    
     $("#country").on("change", function(){
         changeAreaByCountry()
     })
@@ -56,9 +56,30 @@ $(function(){
 
 })
 
+function viewSelectableCountry(){
+    const countryInput = $("#countryInput");
+    $.ajax({
+        type: "post",
+        url: "/findCountries",
+        success: function(response){
+
+            let htmlSelection = "<select id='country' name='country'>";
+            response.forEach(countryName => {
+                htmlSelection += `<option value="${countryName}">${countryName}</option>`
+            })
+            htmlSelection +=  "</select>"
+            countryInput.html(htmlSelection);
+            changeAreaByCountry();
+        },
+        error: function(){
+            console.log("위치 출력 에러")
+        }
+    })
+}
+
 function changeAreaByCountry(){
-    var country = $("#country").val()
-    var areaInput = $("#areaInput")
+    const country = $("#country").val()
+    const areaInput = $("#areaInput")
 
     $.ajax({
         type: "post",

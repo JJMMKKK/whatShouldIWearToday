@@ -1,0 +1,35 @@
+public List<String> findCountries() {
+    List<Place> places = utilRepository.findAll();
+    Set<String> countrySet = new HashSet<>();
+    for (Place place : places) {
+        countrySet.add(place.getCountry());
+    }
+    return new ArrayList<>(countrySet);
+}
+Set은 중복된 요소를 허용하지 않기 때문에, 중복된 국가명을 자동으로 제거할 수 있습니다.
+
+
+public List<String> findCountries() {
+    return utilRepository.findAll().stream()
+            .map(Place::getCountry)
+            .distinct()
+            .collect(Collectors.toList());
+}
+
+각 부분의 의미
+1. stream():
+findAll()로 가져온 리스트를 스트림으로 변환합니다.
+스트림은 컬렉션(리스트, 배열 등)을 처리하는데 사용되는 Java 8 이상의 기능입니다.
+
+2. map(Place::getCountry):
+스트림 내의 각 Place 객체에 대해 getCountry 메서드를 호출하여 국가명만 추출합니다.
+Place::getCountry는 Place 객체의 getCountry 메서드를 참조하는 메서드 참조(method reference)입니다.
+결과적으로 스트림은 국가명 문자열들로 구성됩니다.
+
+3. distinct():
+스트림에서 중복된 국가명을 제거합니다.
+중복되지 않은 고유한 국가명만을 스트림에 남깁니다.
+
+4. collect(Collectors.toList()):
+스트림의 요소들을 리스트로 수집합니다.
+최종 결과는 중복이 제거된 국가명들의 리스트입니다.

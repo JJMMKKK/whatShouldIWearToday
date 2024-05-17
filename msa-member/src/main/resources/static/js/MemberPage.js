@@ -220,7 +220,6 @@ function viewGptAnswer(){
             base_time: base_time
         },
         success: function(response){
-            console.log(response)
 
             const clothData = response[0];
             const dustData = response[1];

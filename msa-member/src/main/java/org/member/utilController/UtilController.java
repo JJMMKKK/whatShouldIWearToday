@@ -13,6 +13,12 @@ public class UtilController {
 
     private final UtilService utilService;
 
+    @PostMapping("/findCountries")
+    @ResponseBody
+    public List<String> findCountries() {
+        return utilService.findCountries();
+    }
+
     @PostMapping("/findAreasByCountry")
     @ResponseBody
     public List<String> findAreasByCountry(String country) {
