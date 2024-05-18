@@ -1,7 +1,6 @@
 package org.member.configuration;
 
 import lombok.RequiredArgsConstructor;
-import org.core.kafka.KafkaConsumerConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -10,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class MemberConfiguration {
 
-    private final KafkaConsumerConfig consumerConfig;
+//    private final KafkaConsumerConfig consumerConfig;
 
     @Bean
     public RestTemplate restTemplate() {

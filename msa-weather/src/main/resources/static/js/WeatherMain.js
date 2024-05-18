@@ -1,22 +1,14 @@
 $(function(){
-
-    changeAreaDropdown();
     timeDataSetting();
-    weatherDataRequest();
-    dustDataRequest();
+    viewSelectableCountry();
 
     $("#weatherRequest").on("submit", function(event){
         event.preventDefault();
         weatherDataRequest();
         dustDataRequest();
     })
-
 }) // $(function()
 
-function changeAreaDropdown(){
-    const user_area = $("#user_area").val();
-    $("#area").val(user_area);
-}
 function timeDataSetting(){
     var base_date = $("#base_date");
     var base_time = $("#base_time");
@@ -174,4 +166,51 @@ function dustDataRequest(){
         }
     })
 
+}
+function viewSelectableCountry(){
+    const countryInput = $("#countryInput");
+    $.ajax({
+        type: "post",
+        url: "/findCountries",
+        success: function(response){
+
+            let htmlSelection = "<select id='country' name='country'>";
+            response.forEach(countryName => {
+                htmlSelection += `<option value="${countryName}">${countryName}</option>`
+            })
+            htmlSelection +=  "</select>"
+            countryInput.html(htmlSelection);
+            changeAreaByCountry();
+        },
+        error: function(){
+            console.log("위치 출력 에러")
+        }
+    })
+}
+function changeAreaByCountry(){
+    const country = $("#country").val()
+    const areaInput = $("#areaInput")
+
+    $.ajax({
+        type: "post",
+        url: "/findAreasByCountry",
+        data: {
+            country: country
+        },
+        datatype: "json",
+        success: function(response){
+
+            let htmlSelection = "<select id='area' name='area'>";
+            response.forEach(areaName => {
+                htmlSelection += `<option value="${areaName}">${areaName}</option>`
+            })
+            htmlSelection +=  "</select>"
+            areaInput.html(htmlSelection);
+            weatherDataRequest();
+            dustDataRequest();
+        },
+        error: function(){
+            console.log("지역에 따른 위치 출력 에러")
+        }
+    })
 }
