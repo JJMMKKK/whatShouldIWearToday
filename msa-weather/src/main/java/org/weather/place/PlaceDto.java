@@ -12,7 +12,6 @@ import java.io.Serializable;
  * DTO for {@link Place}
  */
 @Data
-@Value
 public class PlaceDto implements Serializable {
 
     @NotNull
@@ -25,5 +24,11 @@ public class PlaceDto implements Serializable {
     @NotNull
     @Size(max = 50)
     String stationName;
+
+    public PlaceDto(String country, String area, String stationName) {
+        this.country = country;
+        this.area = area;
+        this.stationName = stationName;
+    }
 
 }

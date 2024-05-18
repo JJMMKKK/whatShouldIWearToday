@@ -35,6 +35,9 @@ public class DustApiController {
     @PostMapping("/dustRequestAjax")
     public PaticulatemattervoDto dustRequestAjax(String country, String area){
         PlaceDto placeDto = placeService.findByCountryAndArea(country, area);
+        if(placeDto == null){
+            return new PaticulatemattervoDto();
+        }
         return dustApiService.findByStationname(placeDto);
     }
 
@@ -92,16 +95,11 @@ public class DustApiController {
             List<PaticulatemattervoDto> paticulateMatterList = new ArrayList<>();
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject item = itemsArray.getJSONObject(i);
-                PaticulatemattervoDto paticulatemattervoDto = new PaticulatemattervoDto();
-                paticulatemattervoDto.setSidoname(item.getString("sidoName"));
-                paticulatemattervoDto.setDatatime(item.getString("dataTime"));
-                paticulatemattervoDto.setStationname(item.getString("stationName"));
-                paticulatemattervoDto.setPm25grade(item.getString("pm25Grade"));
-                paticulatemattervoDto.setPm25flag(item.getString("pm25Flag"));
-                paticulatemattervoDto.setPm25value(item.getString("pm25Value"));
-                paticulatemattervoDto.setPm10grade(item.getString("pm10Grade"));
-                paticulatemattervoDto.setPm10flag(item.getString("pm10Flag"));
-                paticulatemattervoDto.setPm10value(item.getString("pm10Value"));
+                PaticulatemattervoDto paticulatemattervoDto = new PaticulatemattervoDto(
+                        item.getString("sidoName"), item.getString("dataTime"), item.getString("stationName"),
+                        item.getString("pm25Grade"), item.getString("pm25Flag"), item.getString("pm25Value"),
+                        item.getString("pm10Grade"), item.getString("pm10Flag"), item.getString("pm10Value")
+                );
                 paticulateMatterList.add(paticulatemattervoDto);
             }
 
