@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.weather.PQ;
-import org.weather.Paticulatemattervo;
-import org.weather.PaticulatemattervoDto;
-import org.weather.PlaceDto;
+import org.weather.place.PlaceDto;
 
 import java.util.ArrayList;
 import java.util.List;

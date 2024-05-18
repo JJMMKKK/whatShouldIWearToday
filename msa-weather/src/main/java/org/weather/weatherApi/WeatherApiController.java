@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.weather.PQ;
-import org.weather.WQ;
-import org.weather.WeatherDataDTO;
+import org.weather.dustApi.PQ;
 import org.core.dto.WeatherareavoDTO;
 import org.weather.dustApi.DustApiController;
 
@@ -144,7 +142,7 @@ public class WeatherApiController {
                 String fcstValue = item.getString("fcstValue");
 
                 //DTO 데이터 재구성
-                org.weather.WeatherDataDTO weatherDataDTO = new org.weather.WeatherDataDTO();
+                WeatherDataDTO weatherDataDTO = new WeatherDataDTO();
                 weatherDataDTO.setBaseTime(baseTime);
                 weatherDataDTO.setCategory(category);
                 weatherDataDTO.setFcstValue(category, fcstValue);

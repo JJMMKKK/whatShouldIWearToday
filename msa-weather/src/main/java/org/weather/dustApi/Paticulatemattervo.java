@@ -1,4 +1,4 @@
-package org.weather;
+package org.weather.dustApi;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

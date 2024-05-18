@@ -1,4 +1,4 @@
-package org.weather;
+package org.weather.place;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

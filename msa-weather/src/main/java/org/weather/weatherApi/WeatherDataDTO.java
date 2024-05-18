@@ -1,4 +1,4 @@
-package org.weather;
+package org.weather.weatherApi;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

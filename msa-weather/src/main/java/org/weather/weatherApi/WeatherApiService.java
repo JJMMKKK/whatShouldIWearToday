@@ -1,7 +1,6 @@
 package org.weather.weatherApi;
 
 import org.springframework.stereotype.Service;
-import org.weather.Weatherareavo;
 
 import java.util.HashMap;
 import java.util.Map;
