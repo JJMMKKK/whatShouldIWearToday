@@ -2,7 +2,7 @@ package org.member;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.Value;
+import org.core.vo.MemberVO;
 
 import java.io.Serializable;
 import java.time.Instant;

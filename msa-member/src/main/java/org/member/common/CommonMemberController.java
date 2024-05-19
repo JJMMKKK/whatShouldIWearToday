@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CommonMemberController {
 
+    @GetMapping("/Main")
+    public String Main() {
+        return "Main";
+    }
+
     @GetMapping("/LoginPage")
     public String LoginPage() {
         return "Member/LoginPage";
@@ -28,11 +33,12 @@ public class CommonMemberController {
 
     @GetMapping("/LogoutPage")
     public String LogoutPage() {
-        return "Main";
+        return "redirect:/Main";
     }
 
-
-
-
+    @GetMapping("/FindUserInfo")
+    public String FindUserInfo() {
+        return "Member/FindUserInfo";
+    }
 
 }

@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.core.vo.Place;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -37,4 +34,5 @@ public class UtilService {
         }
         return areas;
     }
+
 }

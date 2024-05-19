@@ -2,8 +2,6 @@ package org.member.clothController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.member.ClothDTO;
-import org.member.CQ;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 

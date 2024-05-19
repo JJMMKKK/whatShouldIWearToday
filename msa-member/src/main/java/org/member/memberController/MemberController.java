@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.member.MemberDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,21 +46,28 @@ public class MemberController {
         return view;
     }
 
-    //회원 이메일 변경 업데이트
-    @PostMapping("/updateMember")
-    public void updateMember(Long id, String email) throws Exception {
-        //이메일 중복 검사
-        if (!memberService.existsByEmail(email)) {
-            throw new Exception();
-        }
-        //데이터 변경 진행
-        memberService.updateMember(id, email);
+    // 아이디 찾기
+    @PostMapping("/FindUsernameByEmail")
+    public ModelAndView FindUsernameByEmail(String email) {
+        String username = memberService.FindUsernameByEmail(email);
+        ModelAndView view = new ModelAndView();
+            view.addObject("username", username);
+            view.setViewName("Member/ViewUsername");
+        return view;
     }
 
-    //회원 삭제
-    @PostMapping("/deleteMember")
-    public void deleteMember(Long id) {
-        memberService.deleteMember(id);
+    // 임시 비밀번호로 변경
+    @PostMapping("/UpdatePasswordByEmail")
+    public String FindUsernameByEmail(String username, String email) {
+        String foundedUsername = memberService.UpdatePasswordByEmail(username, email);
+        return "redirect:/prgForUpdatePasswordByEmail?username=" + foundedUsername;
+    }   //prg Pattern
+    @GetMapping("/prgForUpdatePasswordByEmail")
+    public ModelAndView PrgForUpdatePasswordByEmail(String username) {
+        ModelAndView view = new ModelAndView();
+        view.addObject("username", username);
+        view.setViewName("Member/ChangeToTemporaryPassword");
+        return view;
     }
 
 }

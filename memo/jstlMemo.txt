@@ -1,0 +1,25 @@
+<c:set var="aaa" value="${username}"></c:set>
+
+username을 백엔드에서 받아서 aaa라는 이름으로 저장
+
+<c:if test="${조건절}' "var="조건 결과 저장 변수명" scope="조건 결과 저장 scope"></c:if>
+조건절
+- 이름 eq 'OO':     같다
+- 이름 == 'OO':     같다
+- 이름 ne '00':     다르다
+- 이름 != '00':     다르다
+- empty name:      null / blank
+- not empty name:  !null / !blank
+- 조건 and 조건:     and
+- 조건 && 조건:     and
+- 조건 or 조건:     or
+- 조건 || 조건:     or
+
+<c:choose>
+    <c:when test="${조건절}">실행</c:when>
+    <c:when test="${조건절2}">실행2</c:when>
+    <c:otherwise>디폴트</c:otherwise>
+</c:choose>
+
+
+

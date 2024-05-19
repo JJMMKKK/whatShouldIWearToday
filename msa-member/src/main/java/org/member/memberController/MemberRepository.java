@@ -10,6 +10,6 @@ public interface MemberRepository extends JpaRepository<MemberVO, Long> {
     MemberVO findByUsername(String username);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
-
-    //    MemberDTO findByEmail(String email);
+    MemberVO findByEmail(String email);
+    MemberVO findByUsernameAndEmail(String username, String email);
 }

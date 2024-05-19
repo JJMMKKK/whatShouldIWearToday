@@ -9,23 +9,22 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script type="text/javascript" src="resources\js\LoginPage.js"></script>
 
 </head>
 <body>
 
-<h1>Main Login Page</h1>
-<form id="loginForm" method="post" action="<c:url value='/login'/>">
-    username: <input type="text" name="username" id="username" class="loginInfo"><br>
-    password: <input type="text" name="password" id="password" class="loginInfo"><br>
-    <span id="loginErrorField"></span><br>
-    <input type="submit" value="로그인">
+<h1>Find Info Page</h1>
+<form method="post" action="<c:url value='/FindUsernameByEmail'/>">
+    email: <input type="email" name="email"><br>
+    <input type="submit" value="아이디 찾기">
+</form>
+<form method="post" action="<c:url value='/UpdatePasswordByEmail'/>">
+    id: <input type="text" name="username">
+    email: <input type="email" name="email"><br>
+    <input type="submit" value="비밀번호 찾기">
 </form>
 <p>
-    <a href="<c:url value='/RegisterPage'/>">회원가입 페이지</a><br>
-    <a href="<c:url value='/FindUserInfo'/>">회원 정보 찾기 페이지</a><br>
-    <a href="<c:url value='/UpdateEmailPage'/>">이메일 업데이트 페이지</a><br>
-    <a href="<c:url value='/DeletePage'/>">회원 삭제 페이지</a>
+    <a href="<c:url value='/LoginPage'/>">로그인 페이지</a>
 </p>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
