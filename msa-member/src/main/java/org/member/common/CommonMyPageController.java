@@ -18,15 +18,17 @@ public class CommonMyPageController {
 
     private final PrincipalService principalService;
 
+    //마이페이지
     @GetMapping("/MemberPage")
     public ModelAndView MemberPage(Principal principal) {
         UseMemberDataDTO useMemberDataDTO = principalService.findByUsername(principal.getName());
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("useMemberDataDTO", useMemberDataDTO);
-        modelAndView.setViewName("Member/MemberPage");
+            modelAndView.addObject("useMemberDataDTO", useMemberDataDTO);
+            modelAndView.setViewName("Member/MemberPage");
         return modelAndView;
     }
 
+    //마이페이지-옷장
     @PostMapping("/MyClothUpdatePage")
     public ModelAndView MyClothUpdatePage(Principal principal) {
         UseMemberDataDTO useMemberDataDTO = principalService.findByUsername(principal.getName());
@@ -36,23 +38,45 @@ public class CommonMyPageController {
         return modelAndView;
     }
 
-//    //회원 삭제
-//    @PostMapping("/deleteMember")
-//    public void deleteMember(Long id) {
-//        memberService.deleteMember(id);
-//    }
-//
-//    // 비밀번호 변경
-//    @PostMapping("/UpdatePasswordById")
-//    public void deleteMember(Principal  principal) {
-//        memberService.deleteMember(id);
-//    }
-//
-//    //회원 이메일 정보 변경
-//    public void updateMember(Long id, String email) {
-//        MemberVO updateMember = memberRepository.findById(id).orElseThrow(() -> new RuntimeException("Member not found"));
-//        updateMember.setEmail(email);
-//        memberRepository.save(updateMember);
-//    }
+    //회원 탈퇴
+    @PostMapping("/withdrawByUsername")
+    public String withdrawByUsername(Principal principal) {
+        principalService.deleteByUsername(principal.getName());
+        return "redirect:/LoginPage";
+    }
+
+    // 비밀번호 변경 페이지로 이동
+    @PostMapping("/ChangePassword")
+    public ModelAndView ChangePassword(Principal  principal) {
+        UseMemberDataDTO useMemberDataDTO = principalService.findByUsername(principal.getName());
+        ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("useMemberDataDTO", useMemberDataDTO);
+            modelAndView.setViewName("Member/ChangePasswordPage");
+        return modelAndView;
+    }
+
+    // 이메일 변경 페이지로 이동
+    @PostMapping("/ChangeEmail")
+    public ModelAndView ChangeEmail(Principal  principal) {
+        UseMemberDataDTO useMemberDataDTO = principalService.findByUsername(principal.getName());
+        ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("useMemberDataDTO", useMemberDataDTO);
+            modelAndView.setViewName("Member/ChangeEmailPage");
+        return modelAndView;
+    }
+
+    // 비밀번호 변경
+    @PostMapping("/UpdatePasswordByUsername")
+    public String UpdatePasswordByUsername(Principal  principal, String newPassword) {
+        Boolean changeSuccess = principalService.UpdatePasswordByUsername(principal.getName(), newPassword);
+        return "redirect:/logout";
+    }
+
+    //회원 이메일 변경
+    @PostMapping("/UpdateEmailByUsername")
+    public String UpdateEmailByUsername(Principal  principal, String newEmail) {
+        Boolean changeSuccess = principalService.UpdateEmailByUsername(principal.getName(), newEmail);
+        return "redirect:/logout";
+    }
 
 }

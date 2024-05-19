@@ -42,16 +42,23 @@
 </p>
 
 
-<p>
-    <form method="post" action="<c:url value="/MyClothUpdatePage"/>">
-        <input type="submit" value="장롱 정리하기">
-    </form>
-</p>
+<form method="post" action="<c:url value="/MyClothUpdatePage"/>">
+    <input type="submit" value="장롱 정리하기">
+</form>
+<form method="post" action="<c:url value="/ChangePassword"/>">
+    <input type="submit" value="비밀번호 변경">
+</form>
+<form method="post" action="<c:url value="/ChangeEmail"/>">
+    <input type="submit" value="이메일 변경">
+</form>
+<form method="post" action="<c:url value="/logout"/>">
+    <input type="submit" value="로그아웃">
+</form>
+<form method="post" action="<c:url value="/withdrawById"/>">
+    <input type="submit" value="회원 탈퇴">
+</form>
 
-    <form method="post" action="<c:url value="/logout"/>">
-        <input type="submit" value="로그아웃">
-    </form>
-</p>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

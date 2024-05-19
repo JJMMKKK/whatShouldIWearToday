@@ -15,6 +15,8 @@
 <img src="<c:url value='resources/images/error-500.jpg'/>" alt="500에러 이미지" height="500px"><br>
 <c:out value="${errorMessage}"/>
 
+<a href="<c:url value='/logout'/>">메인 화면</a>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
