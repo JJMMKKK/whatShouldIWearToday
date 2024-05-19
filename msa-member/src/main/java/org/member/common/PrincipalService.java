@@ -23,8 +23,8 @@ public class PrincipalService {
         return useMemberDataDTO;
     }
 
-    public void deleteByUsername(String name) {
-        principalRepository.deleteByUsername(name);
+    public void deleteByUsername(String username) {
+        principalRepository.deleteByUsername(username);
     }
 
     public Boolean UpdatePasswordByUsername(String username, String newPassword) {

@@ -16,8 +16,8 @@
 
 <h1>Main Login Page</h1>
 <form id="loginForm" method="post" action="<c:url value='/login'/>">
-    username: <input type="text" name="username" id="username" class="loginInfo"><br>
-    password: <input type="text" name="password" id="password" class="loginInfo"><br>
+    username: <input type="text" name="username" id="username" class="loginInfo" required><br>
+    password: <input type="text" name="password" id="password" class="loginInfo" required><br>
     <span id="loginErrorField"></span><br>
     <input type="submit" value="로그인">
 </form>

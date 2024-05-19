@@ -42,7 +42,7 @@ public class CommonMyPageController {
     @PostMapping("/withdrawByUsername")
     public String withdrawByUsername(Principal principal) {
         principalService.deleteByUsername(principal.getName());
-        return "redirect:/LoginPage";
+        return "redirect:/logout";
     }
 
     // 비밀번호 변경 페이지로 이동

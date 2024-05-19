@@ -15,16 +15,16 @@
 <body>
 
 <h1>Main Register Page</h1>
-<form method="post" action="<c:url value='/create'/>">
-    username: <input type="text" id="username" name="username"><br>
-    <span id="existUsername"></span>
+<form id="registerForm" method="post" action="<c:url value='/create'/>">
+    username: <input type="text" id="username" name="username" required minlength="3"><br>
+    <span id="existUsername"></span><br>
 
 
-    password: <input type="text" id="password" name="password"><br>
+    password: <input type="text" id="password" name="password" required minlength="3"><br>
 
 
-    email: <input type="email" id="email" name="email"><br>
-    <span id="existEmail"></span>
+    email: <input type="email" id="email" name="email" required minlength="3"><br>
+    <span id="existEmail"></span><br>
 
     country:
     <span id="countryInput"></span><br>

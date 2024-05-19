@@ -54,7 +54,7 @@
 <form method="post" action="<c:url value="/logout"/>">
     <input type="submit" value="로그아웃">
 </form>
-<form method="post" action="<c:url value="/withdrawById"/>">
+<form method="post" action="<c:url value="/withdrawByUsername"/>">
     <input type="submit" value="회원 탈퇴">
 </form>
 
