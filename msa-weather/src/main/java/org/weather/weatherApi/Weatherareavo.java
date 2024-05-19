@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @Getter
 @Setter
 @Entity
@@ -35,5 +38,10 @@ public class Weatherareavo {
     @NotNull
     @Column(name = "ny", nullable = false)
     private Integer ny;
+
+    //퍼센트 인코딩
+    public String getEncodedCountry(){
+        return URLEncoder.encode(country, StandardCharsets.UTF_8);
+    }
 
 }
