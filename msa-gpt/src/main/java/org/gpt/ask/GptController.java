@@ -49,14 +49,11 @@ public class GptController {
                 " 오늘의 미세먼지: " + dustData +
                 " 옷 데이터: " + clothData;
         log.info("question {}", question);
-//        String answer = gptService.getGptResponse(question);
-//
-//        GptanswervoDto gptanswervoDto = new GptanswervoDto(username, question, answer);
-//        saveAnswerService.saveAnswer(gptanswervoDto);
 
-
+        //JSON 형태의 예시 데이터
         String answer = "[{\"상의\":\"화이트 심플한 캐주얼한 티셔츠\",\"하의\":\"진청 데일리한 청바지\",\"양말\":\"화이트 베이직한 스니커즈 양말\",\"신발\":\"화이트 심플한 캔버스 스니커즈\"},{\"미세먼지(PM10)\":\"보통 (48)\",\"초미세먼지(PM2.5)\":\"좋음 (15)\",\"마스크 착용 여부\":\"필수\"}]";
 
+        //테이블 형태의 예시 데이터
 //        String answer = "<table>\n" +
 //                "<tr>\n" +
 //                "<th>상의</th>\n" +
@@ -83,6 +80,14 @@ public class GptController {
 //                "<td>없음</td>\n" +
 //                "</tr>\n" +
 //                "</table>";
+
+//        //GPT를 사용한 데이터
+//        String answer = gptService.getGptResponse(question);
+//
+//        //질문 및 답변 저장
+//        GptanswervoDto gptanswervoDto = new GptanswervoDto(username, question, answer);
+//        saveAnswerService.saveAnswer(gptanswervoDto);
+
         return answer;
     }
 

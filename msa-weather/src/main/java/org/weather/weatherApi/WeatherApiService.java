@@ -17,6 +17,9 @@ public class WeatherApiService {
 
     public Map weatherRequest(String area) {
         Weatherareavo weatherareavo = weatherApiRepository.findByArea(area);
+        if(weatherareavo == null){
+            return null;
+        }
         Map map = new HashMap();
             map.put("nx", weatherareavo.getNx());
             map.put("ny", weatherareavo.getNy());

@@ -1,8 +1,6 @@
 package org.weather.dustApi;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.core.vo.Place;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.util.MultiValueMap;
 import org.weather.place.PlaceDto;
 import org.weather.place.PlaceService;
 
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -42,17 +39,14 @@ class DustApiControllerTest {
 
     private String notCountry;
     private String notArea;
-    private String notStationName;
-    
+
     @BeforeEach
     void setUp() {
         country = "경기";
         area = "용인시수지구";
         stationName = "수지";
-
         notCountry = "CA";
         notArea = "San Francisco";
-        notStationName = "notStationName";
     }
 
     @Test

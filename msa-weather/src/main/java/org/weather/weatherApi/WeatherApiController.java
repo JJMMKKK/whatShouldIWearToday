@@ -39,6 +39,7 @@ public class WeatherApiController {
     public Map<String, Object> weatherRequest(WeatherareavoDTO weatherareavoDTO){
 
         String area = weatherareavoDTO.getArea();
+
         List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
             String weatherDataTime = weatherDataDTOList.get(0).getBaseTime().substring(0, 2);
 
@@ -58,14 +59,13 @@ public class WeatherApiController {
     public Map<String, Object> viewTodayWeather(WeatherareavoDTO weatherareavoDTO){
 
         String area = weatherareavoDTO.getArea();
-
         List<WeatherDataDTO> weatherDataDTOList = connectToWeatherApi(weatherareavoDTO);
         String weatherDataTime = weatherDataDTOList.get(0).getBaseTime().substring(0, 2);
 
         Map<String, Object> returnMap = new HashMap<>();
-        returnMap.put("area", area);
-        returnMap.put("weatherDataTime", weatherDataTime);
-        returnMap.put("weatherDataDTOList", weatherDataDTOList);
+            returnMap.put("area", area);
+            returnMap.put("weatherDataTime", weatherDataTime);
+            returnMap.put("weatherDataDTOList", weatherDataDTOList);
 
         log.info("viewTodayWeather area: {}, weatherDataTime: {}시, weatherDataDTOList: {}", area, weatherDataTime, weatherDataDTOList);
 
@@ -90,12 +90,16 @@ public class WeatherApiController {
         return returnList;
     }
 
-    private List<WeatherDataDTO> connectToWeatherApi(WeatherareavoDTO weatherareavoDTO){
+    List<WeatherDataDTO> connectToWeatherApi(WeatherareavoDTO weatherareavoDTO){
 
         String area = weatherareavoDTO.getArea();
 
         //위도와 경도 가져오기
         Map position = weatherApiService.weatherRequest(area);
+        if(position == null){
+            return null;
+        }
+
         List<WeatherDataDTO> weatherDataDTOList = new ArrayList<>();
 
         try {
@@ -143,9 +147,9 @@ public class WeatherApiController {
 
                 //DTO 데이터 재구성
                 WeatherDataDTO weatherDataDTO = new WeatherDataDTO();
-                weatherDataDTO.setBaseTime(baseTime);
-                weatherDataDTO.setCategory(category);
-                weatherDataDTO.setFcstValue(category, fcstValue);
+                    weatherDataDTO.setBaseTime(baseTime);
+                    weatherDataDTO.setCategory(category);
+                    weatherDataDTO.setFcstValue(category, fcstValue);
                 weatherDataDTOList.add(weatherDataDTO);
             }
         } catch (IOException | JSONException e) {
