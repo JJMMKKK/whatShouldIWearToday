@@ -1,0 +1,4 @@
+for (Map.Entry<String, String> entry : changeData.entrySet()) {
+    line = line.replace(entry.getKey(), entry.getValue());
+}
+- 맵의 특정 키-값 쌍에 접근하거나 조작할 때 사용됩니다. 주로 맵을 순회할 때 사용

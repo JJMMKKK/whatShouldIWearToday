@@ -25,6 +25,9 @@
 
     email: <input type="email" id="email" name="email" required minlength="3"><br>
     <span id="existEmail"></span><br>
+    인증번호: <input type="text" id="authorizationCode"><br>
+    <input type="button" id="sendEmail" value="인증번호 보내기"><br>
+    <span id="checkAuthorizationCodeField"></span><br>
 
     country:
     <span id="countryInput"></span><br>

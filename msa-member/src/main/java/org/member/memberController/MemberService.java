@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.core.vo.MemberVO;
 import org.member.MemberDTO;
+import org.member.mailController.MailController;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailController mailController;
 
     //회원가입
     public void createMember(MemberDTO createMemberDataDTO) {
@@ -36,18 +39,14 @@ public class MemberService {
     }
 
     //유저 비밀번호 변경하기
-    public String UpdatePasswordByEmail(String username, String email) {
+    public String UpdatePasswordByEmail(String username, String email) throws IOException {
         MemberVO memberVO = memberRepository.findByUsernameAndEmail(username, email);
         if (memberVO != null) {
             String newPassword = makeTemporaryPassword(15);
             log.info("New password: {}", newPassword);
             memberVO.setPassword(passwordEncoder.encode(newPassword));
             memberRepository.save(memberVO);
-
-            /**
-             * 유저 이메일로 비밀번호 전송하기
-             */
-
+            mailController.temporaryPassword_Email(memberVO.getEmail(), newPassword, memberVO.getUsername());
             return memberVO.getUsername();
         }
         return null;

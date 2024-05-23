@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -58,7 +59,7 @@ public class MemberController {
 
     // 임시 비밀번호로 변경
     @PostMapping("/UpdatePasswordByEmail")
-    public String FindUsernameByEmail(String username, String email) {
+    public String FindUsernameByEmail(String username, String email) throws IOException {
         String foundedUsername = memberService.UpdatePasswordByEmail(username, email);
         return "redirect:/prgForUpdatePasswordByEmail?username=" + foundedUsername;
     }   //prg Pattern
