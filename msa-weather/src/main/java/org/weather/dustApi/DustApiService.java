@@ -18,14 +18,16 @@ public class DustApiService {
     private final DustApiRepository dustApiRepository;
 
     public PaticulatemattervoDto findByStationname(PlaceDto placeDto) {
-        Paticulatemattervo paticulatemattervo = dustApiRepository.findBysidonameAndStationname(placeDto.getCountry(), placeDto.getStationName());
+        Paticulatemattervo paticulatemattervo
+                = dustApiRepository.findBysidonameAndStationname(placeDto.getCountry(), placeDto.getStationName());
         PaticulatemattervoDto paticulatemattervoDto = new PaticulatemattervoDto();
         BeanUtils.copyProperties(paticulatemattervo, paticulatemattervoDto);
         return paticulatemattervoDto;
     }
 
     public PQ selectDustDataForQuestionToGPT(PlaceDto placeDto) {
-        Paticulatemattervo paticulatemattervo = dustApiRepository.findBysidonameAndStationname(placeDto.getCountry(), placeDto.getStationName());
+        Paticulatemattervo paticulatemattervo
+                = dustApiRepository.findBysidonameAndStationname(placeDto.getCountry(), placeDto.getStationName());
         PQ pq = new PQ();
             BeanUtils.copyProperties(paticulatemattervo, pq);
             log.info("pq: {}", pq);

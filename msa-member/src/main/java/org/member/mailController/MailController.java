@@ -4,6 +4,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +19,11 @@ import java.util.Map;
 @Slf4j
 public class MailController {
 
+    @Value("${spring.mail.username}")
+    private static String from;
     private final MailService mailService;
 
-    private static final String from_email = "cjstkrhdfk666@gmail.com";
+    private static final String from_email = from;
     private String expiredTime;
     private String authorizationCode;
 

@@ -10,26 +10,31 @@ $(function(){
     //viewTodayDust();
     viewGptAnswer();
 
+    $("#categoryFilter").on("change", function(){
+        viewMyClothes()
+    })
 
 })//$(function()
 
 function viewMyClothes(){
     const userid = $("#userid").val()
+    var categoryFilter = $("#categoryFilter").val()
     const allClothesField = $("#allClothesField")
     $.ajax({
         type: "post",
         url: "/selectAllClothes",
-        data: {userid: userid},
+        data: {
+            userid: userid,
+            categoryFilter: categoryFilter
+        },
         success: function(response){
-            var tableHtml = "<table>";
-            tableHtml += "<tr><th>Category</th><th>Cloth</th></tr>";
+            var tableHtml = "";
             response.forEach(function(cloth){
                 tableHtml += "<tr>";
                 tableHtml +=    "<td>" + cloth.category + "</td>";
                 tableHtml +=    "<td>" + cloth.clothdata + "</td>";
                 tableHtml += "</tr>";
             });
-            tableHtml += "</table>";
 
             // 생성된 표를 화면에 출력
             allClothesField.html(tableHtml);

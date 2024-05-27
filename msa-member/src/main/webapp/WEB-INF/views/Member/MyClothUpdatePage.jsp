@@ -18,11 +18,34 @@
 
 <h1>My Cloth Update Page</h1>
 <p>
-    <div id="allClothesField"></div>
+    <table>
+        <tr>
+            <th>필터:</th>
+            <th>
+                <select id="categoryFilter">
+                    <option value="기본">기본</option>
+                    <option value="모자">모자</option>
+                    <option value="겉옷">겉옷</option>
+                    <option value="상의">상의</option>
+                    <option value="하의">하의</option>
+                    <option value="양말">양말</option>
+                    <option value="신발">신발</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <th>Cloth</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <tbody id="allClothesField"></tbody>
+    </table>
+
 
     <input type="button" id="showClothField" value="옷 수정하기">
     <div id="clothField" style="display: none">
-        <form id="clothSaveField">
+        <form id="clothSaveField" enctype="multipart/form-data">
             <input type="hidden" id="userid" value="<c:out value="${useMemberDataDTO.id}"/>">
             <input type="text" id="cloth" name="cloth">
             <select id="categoryForCloth">

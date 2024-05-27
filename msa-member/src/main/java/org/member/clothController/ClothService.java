@@ -34,13 +34,11 @@ public class ClothService {
     //옷 추가하기 메서드
     public void updateClothes(ClothDTO updatedCloth) {
         ClothVO clothVO = new ClothVO();
+        BeanUtils.copyProperties(updatedCloth, clothVO);
 
         MemberVO memberVO = new MemberVO();
         memberVO.setId(updatedCloth.getUserid());
         clothVO.setMemberVO(memberVO);
-
-        clothVO.setCategory(updatedCloth.getCategory());
-        clothVO.setClothdata(updatedCloth.getClothdata());
 
         clothRepository.save(clothVO);
     }

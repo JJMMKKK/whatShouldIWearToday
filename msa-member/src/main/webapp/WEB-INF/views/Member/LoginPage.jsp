@@ -24,8 +24,6 @@
 <p>
     <a href="<c:url value='/RegisterPage'/>">회원가입 페이지</a><br>
     <a href="<c:url value='/FindUserInfo'/>">회원 정보 찾기 페이지</a><br>
-    <a href="<c:url value='/UpdateEmailPage'/>">이메일 업데이트 페이지</a><br>
-    <a href="<c:url value='/DeletePage'/>">회원 삭제 페이지</a>
 </p>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

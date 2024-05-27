@@ -25,9 +25,28 @@
     <input type="hidden" id="area" value="<c:out value="${useMemberDataDTO.area}"/>">
     <input type="hidden" id="base_date" name="base_date">
     <input type="hidden" id="base_time" name="base_time">
-<p>
-    <span id="allClothesField"></span>
-</p>
+
+<table>
+    <tr>
+        <th>필터:</th>
+        <th>
+            <select id="categoryFilter">
+                <option value="기본">기본</option>
+                <option value="모자">모자</option>
+                <option value="겉옷">겉옷</option>
+                <option value="상의">상의</option>
+                <option value="하의">하의</option>
+                <option value="양말">양말</option>
+                <option value="신발">신발</option>
+            </select>
+        </th>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <th>Cloth</th>
+    </tr>
+    <tbody id="allClothesField"></tbody>
+</table>
 
 <p>
     <span id="response_weatherData"></span>
